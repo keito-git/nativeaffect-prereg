@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import collections
 import statistics as stats
 from pathlib import Path
 from typing import Any
@@ -125,6 +126,13 @@ def build() -> dict[str, tuple[str, list[str], list[list[str]]]]:
     w1 = [len(s["text"].split()) for s in e1]
     w4 = [len(e4[i]["text"].split()) for i in range(40)]
     cats = sorted({e4[i]["target_emotion"] for i in range(40)})
+    # polarity is a property of the category (indices < 20 are positive), and
+    # the two items per category are template variants, not polarities
+    npos = len({e4[i]["target_emotion"] for i in range(20)})
+    _per = collections.Counter(e4[i]["target_emotion"] for i in range(40))
+    per = max(_per.values())
+    assert set(_per.values()) == {per}, "E4 categories are not balanced"
+    assert len({e4[i]["template_variant"] for i in range(40)}) == per
     sha = hashlib.sha256(
         (R / "axes_nopad/axis_rebuilt_split_20260925.json").read_bytes()).hexdigest()
     T["I"] = ("Stimulus sets and the pre-registered discovery/confirmation split",
@@ -132,7 +140,10 @@ def build() -> dict[str, tuple[str, list[str], list[list[str]]]]:
               [["Source", "GoEmotions validation split", "templates"],
                ["Sentences available", str(len(e1)), str(len(e4))],
                ["Sentences used", "287 (with VAD)", "40 (indices 0-39)"],
-               ["Emotion categories", "--", f"{len(cats)} x 2 polarities"],
+               ["Emotion categories", "--",
+                f"{len(cats)} ({npos} positive, {len(cats)-npos} negative)"],
+               ["Items per category", "--",
+                f"{per} template variants"],
                ["Words per sentence, mean (SD)",
                 f"{stats.mean(w1):.2f} ({stats.pstdev(w1):.2f})",
                 f"{stats.mean(w4):.2f} ({stats.pstdev(w4):.2f})"],
