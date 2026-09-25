@@ -621,7 +621,32 @@ def main() -> int:
         base = [forward_metrics(model, tok, dec, t, layer, None, 0.0)
                 for t in texts]
         names = list(dirs)
+        # Register the layer entry BEFORE the alpha loop and flush after EVERY
+        # alpha, so a job that dies mid-layer keeps everything already measured.
         rows: list[dict[str, Any]] = []
+        layer_entry: dict[str, Any] = {
+            "layer": layer, "model_id": args.model, "seed": args.seed,
+            "hidden_dim": D, "axis_source_file": best_fp,
+            "axis_ica_k": int(best["k"]), "axis_split_repro_top3": repro,
+            "discovery_indices": disc,
+            "heldout_category_indices": held_idx,
+            "category_names": cat_names,
+            "n_e1_matched": len(keep1),
+            "last_token_norm_mean": float(norms.mean()),
+            "subspaces": {t: {k: v for k, v in sub[t].items() if k != "_Q"}
+                          for t in TIERS},
+            "human_dir_pairwise_cos_S1": {
+                f"{a}-{b}": float(hd_S1[a] @ hd_S1[b])
+                for i, a in enumerate(KEYS) for b in KEYS[i + 1:]},
+            "human_dir_pairwise_cos_S2": {
+                f"{a}-{b}": float(hd_S2[a] @ hd_S2[b])
+                for i, a in enumerate(KEYS) for b in KEYS[i + 1:]},
+            "alignment_spectrum_ALL_axes": spectrum,
+            "residual_norm_ratio": rr,
+            "alphas_completed": [],
+            "rows": rows,
+        }
+        layers_out.append(layer_entry)
         for a_rel in ALPHAS:
             js: dict[str, list[float]] = {n: [] for n in names}
             ent_ratio: dict[str, list[float]] = {n: [] for n in names}
@@ -691,36 +716,22 @@ def main() -> int:
                 row[f"paired_human_valence_vs_axis{i}_LESS"] = paired_test(
                     js["human_valence"], js[f"axis{i}"], alternative="less")
             rows.append(row)
+            layer_entry["alphas_completed"].append(a_rel)
+            out_path.write_text(json.dumps(
+                {"env": env_manifest({
+                    "prereg_commit": args.prereg_commit,
+                    "split_sha256": hashlib.sha256(
+                        SPLIT_PATH.read_bytes()).hexdigest(),
+                    "layers_complete": [L["layer"] for L in layers_out
+                                        if len(L["rows"]) == len(ALPHAS)],
+                    "partial_layer": layer,
+                    "partial_alphas_done": layer_entry["alphas_completed"],
+                    "status": "IN_PROGRESS"}),
+                 "layers": layers_out}, indent=2, ensure_ascii=False))
+            print(f"[v2] flushed {out_path.name} (layer {layer}, "
+                  f"alpha {a_rel} done)", flush=True)
 
-        layers_out.append({
-            "layer": layer, "model_id": args.model, "seed": args.seed,
-            "hidden_dim": D, "axis_source_file": best_fp,
-            "axis_ica_k": int(best["k"]), "axis_split_repro_top3": repro,
-            "discovery_indices": disc,
-            "heldout_category_indices": held_idx,
-            "category_names": cat_names,
-            "n_e1_matched": len(keep1),
-            "last_token_norm_mean": float(norms.mean()),
-            "subspaces": {t: {k: v for k, v in sub[t].items() if k != "_Q"}
-                          for t in TIERS},
-            "human_dir_pairwise_cos_S1": {
-                f"{a}-{b}": float(hd_S1[a] @ hd_S1[b])
-                for i, a in enumerate(KEYS) for b in KEYS[i + 1:]},
-            "human_dir_pairwise_cos_S2": {
-                f"{a}-{b}": float(hd_S2[a] @ hd_S2[b])
-                for i, a in enumerate(KEYS) for b in KEYS[i + 1:]},
-            "alignment_spectrum_ALL_axes": spectrum,
-            "residual_norm_ratio": rr,
-            "rows": rows,
-        })
-        out_path.write_text(json.dumps(
-            {"env": env_manifest({"prereg_commit": args.prereg_commit,
-                                  "split_sha256": hashlib.sha256(
-                                      SPLIT_PATH.read_bytes()).hexdigest(),
-                                  "layers_complete": [L["layer"] for L in layers_out],
-                                  "status": "IN_PROGRESS"}),
-             "layers": layers_out}, indent=2, ensure_ascii=False))
-        print(f"[v2] wrote {out_path}", flush=True)
+        print(f"[v2] layer {layer} complete -> {out_path}", flush=True)
 
     # ---- BH families: one per (tier, floor) plus the raw axes ----
     fams: dict[str, list[dict[str, Any]]] = {}
