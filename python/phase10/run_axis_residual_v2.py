@@ -275,6 +275,83 @@ def regress_dir(acts: np.ndarray, y: np.ndarray) -> np.ndarray:
     return (d / n).astype(np.float32)
 
 
+def holdout_direction_check(acts: np.ndarray, y: np.ndarray,
+                           split: np.ndarray | None = None,
+                           seed: int = BOOTSTRAP_SEED) -> dict[str, Any]:
+    """Fit the direction on one half and score it on the held-out half.
+
+    Required by prereg section 14.1: a direction is not trusted on its in-sample
+    fit. The direction is unit-norm so the projection has no scale; the
+    coefficient of determination is therefore reported as the squared Pearson
+    correlation between the projection and the target.
+
+    `split` optionally supplies a boolean train mask (used for the category
+    directions, where the two template variants give a natural split).
+    """
+    n = acts.shape[0]
+    if split is None:
+        idx = np.random.default_rng(seed).permutation(n)
+        tr = np.zeros(n, dtype=bool)
+        tr[idx[: n // 2]] = True
+    else:
+        tr = np.asarray(split, dtype=bool)
+    ho = ~tr
+    out: dict[str, Any] = {"n_total": int(n), "n_train": int(tr.sum()),
+                           "n_holdout": int(ho.sum())}
+    if tr.sum() < 3 or ho.sum() < 3 or np.std(y[tr]) < 1e-12:
+        out.update({"holdout_r": float("nan"), "holdout_r2": float("nan"),
+                    "in_sample_r": float("nan"), "in_sample_r2": float("nan"),
+                    "skipped": "too few samples or constant target"})
+        return out
+
+    def _r(a: np.ndarray, b: np.ndarray) -> float:
+        if np.std(a) < 1e-12 or np.std(b) < 1e-12:
+            return float("nan")
+        return float(np.corrcoef(a, b)[0, 1])
+
+    d_tr = regress_dir(acts[tr], y[tr]).astype(np.float64)
+    r_ho = _r(acts[ho].astype(np.float64) @ d_tr, y[ho])
+    r_in = _r(acts[tr].astype(np.float64) @ d_tr, y[tr])
+    out.update({
+        "holdout_r": r_ho,
+        "holdout_r2": (r_ho ** 2 if not math.isnan(r_ho) else float("nan")),
+        "in_sample_r": r_in,
+        "in_sample_r2": (r_in ** 2 if not math.isnan(r_in) else float("nan")),
+        "NOTE": "in-sample is recorded but never used as evidence (prereg 14.1)",
+    })
+    return out
+
+
+def target_vs_direction_crosscheck(Y: np.ndarray, Dm: np.ndarray,
+                                   labels: list[str]) -> dict[str, Any]:
+    """Put the target correlations next to the direction cosines.
+
+    Prereg section 14.1 item 3: if the directions do not track the structure of
+    their targets, the estimate is not trusted. Underdetermination shows up here
+    as directions far more collinear than their targets.
+    """
+    Y = np.asarray(Y, dtype=np.float64)
+    k = Y.shape[1]
+    tc = np.corrcoef(Y, rowvar=False) if k > 1 else np.ones((1, 1))
+    dc = np.asarray(Dm, dtype=np.float64) @ np.asarray(Dm, dtype=np.float64).T
+    iu = np.triu_indices(k, 1)
+    t_off = np.abs(tc[iu])
+    d_off = np.abs(dc[iu])
+    pair_r = (float(np.corrcoef(t_off, d_off)[0, 1])
+              if t_off.size >= 3 and np.std(t_off) > 1e-12
+              and np.std(d_off) > 1e-12 else float("nan"))
+    return {"labels": labels,
+            "target_corr_matrix": [[round(float(x), 4) for x in row] for row in tc],
+            "direction_cos_matrix": [[round(float(x), 4) for x in row] for row in dc],
+            "mean_abs_target_corr_offdiag": float(t_off.mean()),
+            "mean_abs_direction_cos_offdiag": float(d_off.mean()),
+            "collinearity_excess": float(d_off.mean() - t_off.mean()),
+            "pairwise_agreement_r": pair_r,
+            "INTERPRETATION": ("collinearity_excess >> 0 means the directions are "
+                               "more collinear than their targets, i.e. the "
+                               "estimate is underdetermined and not trusted")}
+
+
 def subspace(mat: np.ndarray) -> dict[str, Any]:
     """Orthonormal basis + effective-rank diagnostics for a (D, r) matrix."""
     M = mat.astype(np.float64)
@@ -412,6 +489,53 @@ def self_check() -> int:
     chk("degeneracy: entropy blowup flagged", degen(0.2, 2.5))
     chk("degeneracy: normal sample not flagged", not degen(0.3, 1.1))
 
+    # holdout check must recover a real direction and reject a noise target
+    rg = np.random.default_rng(7)
+    D_ = 32
+    n_ = 120
+    true_d = rg.standard_normal(D_)
+    true_d /= np.linalg.norm(true_d)
+    Xs = rg.standard_normal((n_, D_))
+    y_real = Xs @ true_d + 0.05 * rg.standard_normal(n_)
+    hc = holdout_direction_check(Xs, y_real)
+    # regress_dir is a covariance direction (d proportional to X^T y), not OLS, so
+    # with n=60 train and d=32 the sampling noise in the covariance caps recovery
+    # around r~0.8; the point of the check is that recovery is clearly strong.
+    chk(f"holdout recovers a real direction (r={hc['holdout_r']:.3f})",
+        hc["holdout_r"] > 0.7)
+    y_noise = rg.standard_normal(n_)
+    hn = holdout_direction_check(Xs, y_noise)
+    chk(f"holdout rejects a noise target (|r|={abs(hn['holdout_r']):.3f})",
+        abs(hn["holdout_r"]) < 0.5)
+    chk("holdout in-sample exceeds holdout for a noise target",
+        abs(hn["in_sample_r"]) > abs(hn["holdout_r"]))
+    # underdetermined case: n < d with a noise target should look bad out of sample
+    hu = holdout_direction_check(rg.standard_normal((20, 2048)),
+                                 rg.standard_normal(20))
+    chk(f"underdetermined n=20,d=2048 holdout is weak "
+        f"(|r|={abs(hu['holdout_r']):.3f})", abs(hu["holdout_r"]) < 0.7)
+    # cross-check: collinear directions from near-INDEPENDENT targets must show a
+    # large excess. Independent gaussian targets are used rather than one-hot
+    # labels: three balanced one-hot columns have off-diagonal correlation of
+    # exactly -0.5, which caps the attainable excess at 1.0 - 0.5 = 0.5.
+    Yt = rg.standard_normal((60, 3))
+    Dcol = np.tile(true_d[:D_], (3, 1)) + 1e-3 * rg.standard_normal((3, D_))
+    Dcol /= np.linalg.norm(Dcol, axis=1, keepdims=True)
+    cc = target_vs_direction_crosscheck(Yt, Dcol, ["a", "b", "c"])
+    chk(f"crosscheck flags collinearity excess "
+        f"({cc['collinearity_excess']:+.3f})", cc["collinearity_excess"] > 0.6)
+    Dorth = np.eye(3, D_)
+    cc2 = target_vs_direction_crosscheck(Yt, Dorth, ["a", "b", "c"])
+    chk(f"crosscheck gives ~no excess for orthogonal dirs "
+        f"({cc2['collinearity_excess']:+.3f})",
+        abs(cc2["collinearity_excess"]) < 0.2)
+    # and the one-hot cap itself is worth asserting so nobody re-tightens it
+    Yoh = np.eye(3)[np.arange(30) % 3]
+    cc3 = target_vs_direction_crosscheck(Yoh, Dcol, ["a", "b", "c"])
+    chk(f"one-hot targets cap the excess at ~0.5 "
+        f"({cc3['collinearity_excess']:+.3f})",
+        0.45 < cc3["collinearity_excess"] <= 0.51)
+
     vad = load_vad()
     if vad and SPLIT_PATH.exists():
         e4 = json.loads(Path("/path/to/work/code/stimuli/"
@@ -533,6 +657,47 @@ def main() -> int:
             acts_h, np.array([1.0 if hc == c else 0.0 for hc in held_cats]))
             for c in cat_names}
 
+        # --- prereg 14.1: holdout validity + target/direction cross-check ---
+        cat_Y = np.stack([[1.0 if hc == c else 0.0 for hc in held_cats]
+                          for c in cat_names], axis=1)          # (40, 20)
+        variant_mask = np.array(
+            [e4[i].get("template_variant", 0) == 0 for i in held_idx], dtype=bool)
+        estimation_validity: dict[str, Any] = {
+            "S1_vad_on_discovery20": {
+                k: holdout_direction_check(acts_d, y_disc[k]) for k in KEYS},
+            "S2_vad_on_E1_287": {
+                k: holdout_direction_check(X1, y_e1[k]) for k in KEYS},
+            "S3_category_dirs_on_heldout40": {
+                c: holdout_direction_check(acts_h, cat_Y[:, j],
+                                           split=variant_mask)
+                for j, c in enumerate(cat_names)},
+            "crosscheck_S1_vad": target_vs_direction_crosscheck(
+                np.stack([y_disc[k] for k in KEYS], axis=1),
+                np.stack([hd_S1[k] for k in KEYS], axis=0), list(KEYS)),
+            "crosscheck_S2_vad": target_vs_direction_crosscheck(
+                np.stack([y_e1[k] for k in KEYS], axis=1),
+                np.stack([hd_S2[k] for k in KEYS], axis=0), list(KEYS)),
+            "crosscheck_S3_categories": target_vs_direction_crosscheck(
+                cat_Y, np.stack([cat_dirs[c] for c in cat_names], axis=0),
+                cat_names),
+        }
+        hv = [estimation_validity["S2_vad_on_E1_287"][k]["holdout_r"]
+              for k in KEYS]
+        cv = [estimation_validity["S3_category_dirs_on_heldout40"][c]["holdout_r"]
+              for c in cat_names]
+        print(f"[v2] holdout r  S1 V/A/D="
+              f"{[round(estimation_validity['S1_vad_on_discovery20'][k]['holdout_r'], 3) for k in KEYS]}"
+              f"  S2 V/A/D={[round(x, 3) for x in hv]}"
+              f"  categories median="
+              f"{round(float(np.nanmedian(cv)), 3)}", flush=True)
+        for nm in ("crosscheck_S1_vad", "crosscheck_S2_vad",
+                   "crosscheck_S3_categories"):
+            c = estimation_validity[nm]
+            print(f"[v2] {nm}: mean|target corr|="
+                  f"{c['mean_abs_target_corr_offdiag']:.3f} "
+                  f"mean|dir cos|={c['mean_abs_direction_cos_offdiag']:.3f} "
+                  f"excess={c['collinearity_excess']:+.3f}", flush=True)
+
         sub = {
             "S1": subspace(np.stack([hd_S1[k] for k in KEYS], axis=1)),
             "S2": subspace(np.stack([hd_S2[k] for k in KEYS], axis=1)),
@@ -643,6 +808,7 @@ def main() -> int:
                 for i, a in enumerate(KEYS) for b in KEYS[i + 1:]},
             "alignment_spectrum_ALL_axes": spectrum,
             "residual_norm_ratio": rr,
+            "direction_estimation_validity": estimation_validity,
             "alphas_completed": [],
             "rows": rows,
         }
