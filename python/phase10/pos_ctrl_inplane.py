@@ -245,8 +245,7 @@ def env(extra: dict[str, Any]) -> dict[str, Any]:
         "hostname": platform.node(), "CUDA_VISIBLE_DEVICES": _CVD,
         "gpu_uuid_visible_physical": [um.get(i.strip(), "?")
                                       for i in (_CVD or "").split(",") if i.strip()],
-        "pc_k_FIXED": PC_K, "inplane_seed": INPLANE_SEED,
-        "fullrand_seed": FULLRAND_SEED, "alphas": list(ALPHAS),
+        "pc_k_FIXED": PC_K, "alphas": list(ALPHAS),
         "hook_scope": "last_token", "judge_llm_loaded": False,
         "generation_used": False,
         "stimuli": "DISCOVERY 20 only (confirmation not read)",
@@ -305,6 +304,9 @@ def main() -> int:
     ap.add_argument("--layers", type=int, nargs="+", default=list(LAYERS))
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--out-dir", type=Path, default=BASE / "pos_ctrl_inplane")
+    ap.add_argument("--floor-seed", type=int, default=None,
+                    help="base seed for the floor draws; prereg 37.2 seed stability. "
+                         "None keeps the registered defaults 42+31337 / 42+9999")
     ap.add_argument("--prereg-commit", default="")
     ap.add_argument("--self-check", action="store_true")
     a = ap.parse_args()
@@ -341,7 +343,8 @@ def main() -> int:
 
     a.out_dir.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    out = a.out_dir / f"pos_ctrl_inplane_{stamp}.json"
+    tag = "" if a.floor_seed is None else f"_floorseed{a.floor_seed}"
+    out = a.out_dir / f"pos_ctrl_inplane{tag}_{stamp}.json"
     layers_out: list[dict[str, Any]] = []
 
     for L in a.layers:
@@ -370,11 +373,14 @@ def main() -> int:
         dirs: dict[str, np.ndarray] = {
             "pos_lasttoken": regress_dir(A_last, yv),
             "pos_meanpool": regress_dir(A_mean, yv)}
-        rg = np.random.default_rng(INPLANE_SEED)
+        fs = a.floor_seed
+        ip_seed = INPLANE_SEED if fs is None else fs + 31337
+        fr_seed = FULLRAND_SEED if fs is None else fs + 9999
+        rg = np.random.default_rng(ip_seed)
         ip = rg.standard_normal((N_FLOOR, PC_K)) @ PCs
         for i in range(N_FLOOR):
             dirs[f"inplane_{i}"] = (ip[i] / np.linalg.norm(ip[i])).astype(np.float32)
-        rg2 = np.random.default_rng(FULLRAND_SEED)
+        rg2 = np.random.default_rng(fr_seed)
         fr = rg2.standard_normal((N_FLOOR, D))
         for i in range(N_FLOOR):
             dirs[f"fullrand_{i}"] = (fr[i] / np.linalg.norm(fr[i])).astype(np.float32)
@@ -438,10 +444,23 @@ def main() -> int:
             for pn in ("pos_lasttoken", "pos_meanpool"):
                 for fn_, fv in floors.items():
                     row[f"paired_{pn}_vs_{fn_}"] = paired(jsv[pn], fv)
+            # C1 part (a), prereg 37: paired Wilcoxon of the in-plane floor against
+            # the full-space floor. Previously missing, so C1 was not evaluable.
+            row["paired_floor_inplane_vs_fullrand"] = paired(
+                floors["inplane"], floors["fullrand"])
+            row["floor_ratio_inplane_over_fullrand"] = (
+                row["js_floor_inplane_mean"] / row["js_floor_fullrand_mean"]
+                if row["js_floor_fullrand_mean"] > 0 else float("nan"))
+            # keep the per-sample floors so the test can be recomputed later
+            row["_floor_samples"] = {k: [round(x, 12) for x in v]
+                                     for k, v in floors.items()}
             rows.append(row)
             entry["alphas_completed"].append(al)
             out.write_text(json.dumps(
                 {"env": env({"prereg_commit": a.prereg_commit,
+                             "floor_seed_arg": a.floor_seed,
+                             "inplane_seed_used": ip_seed,
+                             "fullrand_seed_used": fr_seed,
                              "status": "IN_PROGRESS", "partial_layer": L}),
                  "layers": layers_out}, indent=2, ensure_ascii=False))
             print(f"    flushed (L{L} a={al})", flush=True)
@@ -454,6 +473,10 @@ def main() -> int:
     famf = [r["paired_pos_lasttoken_vs_fullrand"] for Lo in layers_out
             for r in Lo["rows"]]
     for t, q in zip(famf, bh([x["wilcoxon_p"] for x in famf])):
+        t["wilcoxon_q_bh"] = q
+    fam_c1 = [r["paired_floor_inplane_vs_fullrand"] for Lo in layers_out
+              for r in Lo["rows"]]
+    for t, q in zip(fam_c1, bh([x["wilcoxon_p"] for x in fam_c1])):
         t["wilcoxon_q_bh"] = q
 
     def passes(key: str) -> list[dict[str, Any]]:
@@ -478,9 +501,26 @@ def main() -> int:
             "vs_fullrand_delta": r["paired_pos_lasttoken_vs_fullrand"]["cliffs_delta"],
             "vs_fullrand_q": r["paired_pos_lasttoken_vs_fullrand"].get("wilcoxon_q_bh")}
            for Lo in layers_out for r in Lo["rows"] if r["alpha_rel"] == 0.05]
+    c1_rows = [(Lo["layer"], r) for Lo in layers_out for r in Lo["rows"]
+               if r["alpha_rel"] == 0.05]
+    c1_sig = [L for L, r in c1_rows
+              if r["paired_floor_inplane_vs_fullrand"]["mean_diff"] > 0
+              and r["paired_floor_inplane_vs_fullrand"].get("wilcoxon_q_bh", 1) < 0.05]
+    c1_ratios = {L: r["floor_ratio_inplane_over_fullrand"] for L, r in c1_rows}
+    c1_verdict = {
+        "layers_significant_at_a05": sorted(c1_sig),
+        "n_layers_significant": len(c1_sig),
+        "ratios_at_a05": {str(k): round(v, 3) for k, v in c1_ratios.items()},
+        "min_ratio_at_a05": round(min(c1_ratios.values()), 3),
+        "part_a_pass_3of4_layers": bool(len(c1_sig) >= 3),
+        "part_b_pass_all_ratios_ge_1.5": bool(all(v >= 1.5
+                                                 for v in c1_ratios.values())),
+        "C1_PASS": bool(len(c1_sig) >= 3
+                        and all(v >= 1.5 for v in c1_ratios.values()))}
     reading = ("b_inplane_floor_is_strong_metric_has_resolution" if fr_pass
                else "a_metric_lacks_resolution")
-    verdict = {"pos_beats_inplane_cells": ip_pass,
+    verdict = {"C1_floor_comparison": c1_verdict,
+               "pos_beats_inplane_cells": ip_pass,
                "pos_beats_inplane": bool(ip_pass),
                "pos_beats_fullrand_cells": fr_pass,
                "pos_beats_fullrand": bool(fr_pass),
@@ -491,9 +531,15 @@ def main() -> int:
                         "is reading b, so the negative conclusion stands; pos "
                         "failing both is reading a and the framing must be rebuilt")}
     out.write_text(json.dumps(
-        {"env": env({"prereg_commit": a.prereg_commit, "status": "COMPLETE"}),
+        {"env": env({"prereg_commit": a.prereg_commit, "status": "COMPLETE",
+                     "floor_seed_arg": a.floor_seed,
+                     "inplane_seed_used": ip_seed,
+                     "fullrand_seed_used": fr_seed}),
          "VERDICT": verdict, "layers": layers_out}, indent=2, ensure_ascii=False))
-    print(f"\npos beats in-plane: {bool(ip_pass)} ({len(ip_pass)} cells)")
+    print(f"\nC1: {c1_verdict['n_layers_significant']}/4 layers significant at "
+          f"a=0.05, min ratio {c1_verdict['min_ratio_at_a05']} -> "
+          f"C1_PASS={c1_verdict['C1_PASS']}")
+    print(f"pos beats in-plane: {bool(ip_pass)} ({len(ip_pass)} cells)")
     print(f"pos beats full-space: {bool(fr_pass)} ({len(fr_pass)} cells)")
     print(f"DISCRIMINATOR: {reading}")
     print(f"FINAL -> {out}")
