@@ -1,0 +1,265 @@
+{
+  "note": "CPU-only conditioning diagnostic for the human-affect subspace variants.",
+  "degeneracy": {
+    "discovery_items_per_category": 1,
+    "discovery_n_categories": 20,
+    "verdict": "one-vs-rest on the discovery set is vacuous; fit categories on E4 40-79",
+    "heldout_e4_indices": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79
+    ],
+    "heldout_n_categories": 20
+  },
+  "layers": {
+    "5": {
+      "S2_vad_on_E1_300": {
+        "singular_values": [
+          1.3385,
+          1.0019,
+          0.4522
+        ],
+        "eff_rank_1pct": 3,
+        "eff_rank_10pct": 3,
+        "eff_rank_participation": 2.6,
+        "pairwise_cos": {
+          "valence-arousal": 0.0339,
+          "valence-dominance": 0.7916,
+          "arousal-dominance": -0.0448
+        },
+        "residual_norm_ratio_top3": [
+          0.9472,
+          0.8828,
+          0.9123
+        ],
+        "abs_cos_max_vad_top3": [
+          0.2693,
+          0.3588,
+          0.3272
+        ]
+      },
+      "S1_vad_on_discovery_20_PREREGISTERED": {
+        "singular_values": [
+          1.5921,
+          0.6704,
+          0.1254
+        ],
+        "eff_rank_1pct": 3,
+        "eff_rank_10pct": 2,
+        "eff_rank_participation": 1.901,
+        "pairwise_cos": {
+          "valence_arousal": 0.6360945701599121,
+          "valence_dominance": 0.9835286140441895,
+          "arousal_dominance": 0.6646436452865601
+        },
+        "residual_norm_ratio_top3": [
+          0.9953,
+          0.9927,
+          0.998
+        ],
+        "abs_cos_max_vad_top3": [
+          0.0944,
+          0.1177,
+          0.039
+        ],
+        "source_file": "axis_residual_discovery_20260925T113636Z.json"
+      }
+    },
+    "7": {
+      "S2_vad_on_E1_300": {
+        "singular_values": [
+          1.3398,
+          1.0003,
+          0.4518
+        ],
+        "eff_rank_1pct": 3,
+        "eff_rank_10pct": 3,
+        "eff_rank_participation": 2.598,
+        "pairwise_cos": {
+          "valence-arousal": 0.0501,
+          "valence-dominance": 0.7939,
+          "arousal-dominance": -0.0054
+        },
+        "residual_norm_ratio_top3": [
+          0.9328,
+          0.9038,
+          0.9314
+        ],
+        "abs_cos_max_vad_top3": [
+          0.3005,
+          0.324,
+          0.3414
+        ]
+      },
+      "S1_vad_on_discovery_20_PREREGISTERED": {
+        "singular_values": [
+          1.6118,
+          0.6177,
+          0.1427
+        ],
+        "eff_rank_1pct": 3,
+        "eff_rank_10pct": 2,
+        "eff_rank_participation": 1.876,
+        "pairwise_cos": {
+          "valence_arousal": 0.6859671473503113,
+          "valence_dominance": 0.978314220905304,
+          "arousal_dominance": 0.7212656140327454
+        },
+        "residual_norm_ratio_top3": [
+          0.9917,
+          0.9971,
+          0.9872
+        ],
+        "abs_cos_max_vad_top3": [
+          0.1281,
+          0.0754,
+          0.1483
+        ],
+        "source_file": "axis_residual_discovery_20260925T113636Z.json"
+      }
+    },
+    "10": {
+      "S2_vad_on_E1_300": {
+        "singular_values": [
+          1.3541,
+          1.0002,
+          0.4075
+        ],
+        "eff_rank_1pct": 3,
+        "eff_rank_10pct": 3,
+        "eff_rank_participation": 2.543,
+        "pairwise_cos": {
+          "valence-arousal": -0.006,
+          "valence-dominance": 0.8331,
+          "arousal-dominance": 0.0301
+        },
+        "residual_norm_ratio_top3": [
+          0.9131,
+          0.8921,
+          0.9276
+        ],
+        "abs_cos_max_vad_top3": [
+          0.3262,
+          0.4204,
+          0.2217
+        ]
+      },
+      "S1_vad_on_discovery_20_PREREGISTERED": {
+        "singular_values": [
+          1.6816,
+          0.4033,
+          0.0973
+        ],
+        "eff_rank_1pct": 3,
+        "eff_rank_10pct": 2,
+        "eff_rank_participation": 1.587,
+        "pairwise_cos": {
+          "valence_arousal": 0.8637959957122803,
+          "valence_dominance": 0.9892691373825073,
+          "arousal_dominance": 0.8871346712112427
+        },
+        "residual_norm_ratio_top3": [
+          0.9981,
+          0.8259,
+          0.9046
+        ],
+        "abs_cos_max_vad_top3": [
+          0.023,
+          0.5625,
+          0.4249
+        ],
+        "source_file": "axis_residual_discovery_20260925T113636Z.json"
+      }
+    },
+    "12": {
+      "S2_vad_on_E1_300": {
+        "singular_values": [
+          1.3636,
+          0.9977,
+          0.3808
+        ],
+        "eff_rank_1pct": 3,
+        "eff_rank_10pct": 3,
+        "eff_rank_participation": 2.507,
+        "pairwise_cos": {
+          "valence-arousal": 0.0385,
+          "valence-dominance": 0.8549,
+          "arousal-dominance": 0.0507
+        },
+        "residual_norm_ratio_top3": [
+          0.9425,
+          0.9595,
+          0.9396
+        ],
+        "abs_cos_max_vad_top3": [
+          0.2594,
+          0.1188,
+          0.1801
+        ]
+      },
+      "S1_vad_on_discovery_20_PREREGISTERED": {
+        "singular_values": [
+          1.6712,
+          0.4394,
+          0.1182
+        ],
+        "eff_rank_1pct": 3,
+        "eff_rank_10pct": 2,
+        "eff_rank_participation": 1.656,
+        "pairwise_cos": {
+          "valence_arousal": 0.8357148766517639,
+          "valence_dominance": 0.9840190410614014,
+          "arousal_dominance": 0.8673565983772278
+        },
+        "residual_norm_ratio_top3": [
+          0.998,
+          0.9584,
+          0.901
+        ],
+        "abs_cos_max_vad_top3": [
+          0.0435,
+          0.2641,
+          0.4255
+        ],
+        "source_file": "axis_residual_discovery_20260925T113636Z.json"
+      }
+    }
+  }
+}
