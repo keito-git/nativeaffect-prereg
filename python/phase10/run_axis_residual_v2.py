@@ -277,7 +277,8 @@ def regress_dir(acts: np.ndarray, y: np.ndarray) -> np.ndarray:
 
 def holdout_direction_check(acts: np.ndarray, y: np.ndarray,
                            split: np.ndarray | None = None,
-                           seed: int = BOOTSTRAP_SEED) -> dict[str, Any]:
+                           seed: int = BOOTSTRAP_SEED,
+                           n_perm: int = 200) -> dict[str, Any]:
     """Fit the direction on one half and score it on the held-out half.
 
     Required by prereg section 14.1: a direction is not trusted on its in-sample
@@ -312,11 +313,40 @@ def holdout_direction_check(acts: np.ndarray, y: np.ndarray,
     d_tr = regress_dir(acts[tr], y[tr]).astype(np.float64)
     r_ho = _r(acts[ho].astype(np.float64) @ d_tr, y[ho])
     r_in = _r(acts[tr].astype(np.float64) @ d_tr, y[tr])
+
+    # Permutation null on THESE activations and THIS n/d, so the benchmark comes
+    # from the real geometry rather than from a synthetic setting of different
+    # dimensionality (prereg 17). Costs no forward passes.
+    null: list[float] = []
+    prng = np.random.default_rng(seed + 101)
+    for _ in range(n_perm):
+        yp = prng.permutation(y)
+        try:
+            dp = regress_dir(acts[tr], yp[tr]).astype(np.float64)
+        except RuntimeError:
+            continue
+        rp = _r(acts[ho].astype(np.float64) @ dp, yp[ho])
+        if not math.isnan(rp):
+            null.append(abs(rp))
+    null_arr = np.asarray(null, dtype=float)
+    if null_arr.size >= 10 and not math.isnan(r_ho):
+        p_perm = float((null_arr >= abs(r_ho)).mean())
+        p95 = float(np.quantile(null_arr, 0.95))
+        mean_null = float(null_arr.mean())
+    else:
+        p_perm = p95 = mean_null = float("nan")
+
     out.update({
         "holdout_r": r_ho,
         "holdout_r2": (r_ho ** 2 if not math.isnan(r_ho) else float("nan")),
         "in_sample_r": r_in,
         "in_sample_r2": (r_in ** 2 if not math.isnan(r_in) else float("nan")),
+        "perm_n": int(null_arr.size),
+        "perm_null_mean_abs_r": mean_null,
+        "perm_null_p95_abs_r": p95,
+        "perm_p_value": p_perm,
+        "GENERALISES": bool((not math.isnan(p_perm)) and p_perm < 0.05
+                            and (not math.isnan(p95)) and abs(r_ho) > p95),
         "NOTE": "in-sample is recorded but never used as evidence (prereg 14.1)",
     })
     return out
@@ -503,17 +533,23 @@ def self_check() -> int:
     # around r~0.8; the point of the check is that recovery is clearly strong.
     chk(f"holdout recovers a real direction (r={hc['holdout_r']:.3f})",
         hc["holdout_r"] > 0.7)
+    chk(f"perm null flags a real direction as generalising "
+        f"(p={hc['perm_p_value']:.3f})", hc["GENERALISES"])
     y_noise = rg.standard_normal(n_)
     hn = holdout_direction_check(Xs, y_noise)
+    chk(f"perm null rejects a noise target (p={hn['perm_p_value']:.3f})",
+        not hn["GENERALISES"])
     chk(f"holdout rejects a noise target (|r|={abs(hn['holdout_r']):.3f})",
         abs(hn["holdout_r"]) < 0.5)
     chk("holdout in-sample exceeds holdout for a noise target",
         abs(hn["in_sample_r"]) > abs(hn["holdout_r"]))
     # underdetermined case: n < d with a noise target should look bad out of sample
     hu = holdout_direction_check(rg.standard_normal((20, 2048)),
-                                 rg.standard_normal(20))
+                                 rg.standard_normal(20), n_perm=100)
     chk(f"underdetermined n=20,d=2048 holdout is weak "
         f"(|r|={abs(hu['holdout_r']):.3f})", abs(hu["holdout_r"]) < 0.7)
+    chk("underdetermined noise does not pass the perm null",
+        not hu["GENERALISES"])
     # cross-check: collinear directions from near-INDEPENDENT targets must show a
     # large excess. Independent gaussian targets are used rather than one-hot
     # labels: three balanced one-hot columns have off-diagonal correlation of
@@ -681,6 +717,44 @@ def main() -> int:
                 cat_Y, np.stack([cat_dirs[c] for c in cat_names], axis=0),
                 cat_names),
         }
+        # prereg 17: a tier can support the claim only if its human directions
+        # generalise. S1 sits at n=20, d=2048 and may be estimating noise, in
+        # which case its residual test removes noise and proves nothing.
+        estimation_validity["tier_validation"] = {
+            "S1": {"all_vad_generalise": all(
+                estimation_validity["S1_vad_on_discovery20"][k]["GENERALISES"]
+                for k in KEYS),
+                "holdout_r": {k: estimation_validity["S1_vad_on_discovery20"][k]
+                              ["holdout_r"] for k in KEYS},
+                "perm_p": {k: estimation_validity["S1_vad_on_discovery20"][k]
+                           ["perm_p_value"] for k in KEYS},
+                "n": 20, "d": D},
+            "S2": {"all_vad_generalise": all(
+                estimation_validity["S2_vad_on_E1_287"][k]["GENERALISES"]
+                for k in KEYS),
+                "holdout_r": {k: estimation_validity["S2_vad_on_E1_287"][k]
+                              ["holdout_r"] for k in KEYS},
+                "perm_p": {k: estimation_validity["S2_vad_on_E1_287"][k]
+                           ["perm_p_value"] for k in KEYS},
+                "n": len(keep1), "d": D},
+            "S3": {"frac_categories_generalise": float(np.mean(
+                [1.0 if estimation_validity["S3_category_dirs_on_heldout40"][c]
+                 ["GENERALISES"] else 0.0 for c in cat_names])),
+                "n": len(held_idx), "d": D},
+            "RULE": ("only a tier whose human directions generalise may support "
+                     "the claim; a tier that fails is reported but marked "
+                     "uninformative because its residual test removes noise"),
+            "synthetic_benchmarks_for_context": {
+                "recoverable_direction_n60_d32": 0.794,
+                "noise_target_n120_d32": 0.214,
+                "underdetermined_noise_n20_d2048": 0.191},
+        }
+        tv = estimation_validity["tier_validation"]
+        print(f"[v2] tier validation: S1 generalises={tv['S1']['all_vad_generalise']} "
+              f"S2 generalises={tv['S2']['all_vad_generalise']} "
+              f"S3 categories generalising={tv['S3']['frac_categories_generalise']:.2f}",
+              flush=True)
+
         hv = [estimation_validity["S2_vad_on_E1_287"][k]["holdout_r"]
               for k in KEYS]
         cv = [estimation_validity["S3_category_dirs_on_heldout40"][c]["holdout_r"]
