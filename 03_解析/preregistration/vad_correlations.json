@@ -1,0 +1,128 @@
+{
+  "norms_file": "/path/to/work/affectgeometry/data/vad_norms/warriner_2013_en_vad.csv",
+  "norms_sha256": "d61a4c3c95afbdaa3a2872a3ac1484756f7d5cd72a8a47508869f920dc671554",
+  "n_entries": 2298,
+  "columns_present": [
+    "arousal",
+    "dominance",
+    "valence",
+    "word"
+  ],
+  "IMPORTANT": "this file holds 2298 entries, a SUBSET of the full Warriner et al. norm list; correlations below describe THIS file only and no published value is asserted here",
+  "word_level": {
+    "valence-arousal": {
+      "n": 2298,
+      "pearson_r": -0.216,
+      "pearson_p": 1.1655752867069007e-25,
+      "spearman_rho": -0.1463,
+      "spearman_p": 1.8050598981143066e-12
+    },
+    "valence-dominance": {
+      "n": 2298,
+      "pearson_r": 0.6927,
+      "pearson_p": 0.0,
+      "spearman_rho": 0.6275,
+      "spearman_p": 8.96226686822585e-252
+    },
+    "arousal-dominance": {
+      "n": 2298,
+      "pearson_r": -0.197,
+      "pearson_p": 1.551366737075207e-21,
+      "spearman_rho": -0.1473,
+      "spearman_p": 1.295707627855763e-12
+    }
+  },
+  "sentence_level_E1_300": {
+    "n_matched": 287,
+    "n_total": 300,
+    "valence-arousal": {
+      "n": 287,
+      "pearson_r": -0.0683,
+      "pearson_p": 0.24857450332952025,
+      "spearman_rho": 0.0169,
+      "spearman_p": 0.7758110627157481
+    },
+    "valence-dominance": {
+      "n": 287,
+      "pearson_r": 0.7693,
+      "pearson_p": 2.1152315667876277e-57,
+      "spearman_rho": 0.7288,
+      "spearman_p": 8.405023577822751e-49
+    },
+    "arousal-dominance": {
+      "n": 287,
+      "pearson_r": -0.044,
+      "pearson_p": 0.4580981285568772,
+      "spearman_rho": -0.0143,
+      "spearman_p": 0.8098042664032199
+    }
+  },
+  "sentence_level_E4_discovery_20": {
+    "n_matched": 20,
+    "n_total": 20,
+    "valence-arousal": {
+      "n": 20,
+      "pearson_r": 0.0428,
+      "pearson_p": 0.8576901814830317,
+      "spearman_rho": 0.1262,
+      "spearman_p": 0.5959535323610596
+    },
+    "valence-dominance": {
+      "n": 20,
+      "pearson_r": 0.8666,
+      "pearson_p": 7.744878592608205e-07,
+      "spearman_rho": 0.9045,
+      "spearman_p": 4.405590382716126e-08
+    },
+    "arousal-dominance": {
+      "n": 20,
+      "pearson_r": 0.0556,
+      "pearson_p": 0.8157791648866365,
+      "spearman_rho": 0.2265,
+      "spearman_p": 0.33683511697745916
+    }
+  },
+  "sentence_level_E4_heldout_40to79": {
+    "n_matched": 40,
+    "n_total": 40,
+    "valence-arousal": {
+      "n": 40,
+      "pearson_r": -0.1624,
+      "pearson_p": 0.31672691920611407,
+      "spearman_rho": -0.0386,
+      "spearman_p": 0.8132934367431224
+    },
+    "valence-dominance": {
+      "n": 40,
+      "pearson_r": 0.7871,
+      "pearson_p": 1.7092166975654284e-09,
+      "spearman_rho": 0.8526,
+      "spearman_p": 2.8945413470286035e-12
+    },
+    "arousal-dominance": {
+      "n": 40,
+      "pearson_r": 0.1571,
+      "pearson_p": 0.33301036014956936,
+      "spearman_rho": 0.0824,
+      "spearman_p": 0.6132766231528638
+    }
+  },
+  "interpretation_check": {
+    "observed_subspace_cos_V_D_S1_discovery": [
+      0.984,
+      0.978,
+      0.989,
+      0.984
+    ],
+    "observed_subspace_cos_V_D_S2_E1": [
+      0.7916,
+      0.7939,
+      0.8331,
+      0.8549
+    ],
+    "word_level_r_V_D": 0.6927,
+    "sentence_level_r_V_D_E1": 0.7693,
+    "sentence_level_r_V_D_discovery": 0.8666,
+    "question": "does the target-level V-D correlation explain the direction collinearity, and is the discovery set more collinear than E1?"
+  }
+}
