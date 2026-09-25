@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\caption{Table III. Control types and the confound each one removes.}
+\label{tab:iii}
+\begin{tabular}{llll}
+\toprule
+Control & Construction & What it tests & What it holds fixed \\
+\midrule
+Full-space random & uniform on the unit sphere of R^2048 & direction is not the specific one claimed & none of the variance structure \\
+Axis-orthogonal & full-space draw, Gram-Schmidt against the axis & overlap with the axis itself & subspace variance \\
+In-plane random (VMIC) & uniform on the unit sphere of the top-10 PC span & direction sits in the dominant-variance subspace & everything except the rotation within that subspace \\
+Variance-matched in-plane & in-plane draw with coefficients scaled by PC sd & as above, plus the per-component variance profile & the rotation within the subspace only \\
+PC arms (PC1-PC5) & the principal components themselves & whether a plain PC reproduces the axis effect & not a floor; a reference direction \\
+\bottomrule
+\end{tabular}
+\end{table}

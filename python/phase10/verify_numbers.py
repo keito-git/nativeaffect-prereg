@@ -93,6 +93,24 @@ def build_pool() -> set:
                 i = r.get("js_floor_inplane_mean")
                 if f:
                     pool.add(i / f)
+    # stimulus-set statistics (Table I) come from the raw stimulus files
+    import statistics as _st
+    for f_, lim in ((B / "data/raw/stimuli/stimuli_e1.json", None),
+                    (B / "data/raw/stimuli/stimuli_e4.json", 40)):
+        if not f_.exists():
+            continue
+        d = json.loads(f_.read_text())
+        w = [len(s["text"].split()) for s in (d[:lim] if lim else d)]
+        for x in (_st.mean(w), _st.pstdev(w), min(w), max(w), len(d)):
+            pool.add(float(x))
+    # procedure-dependence ratios (Table VIII)
+    for L in ("5", "7", "10", "12"):
+        e = a["layers"][L]
+        p1 = e["P1_cov"]["inside_fraction_pct_per_axis"]
+        p2 = e["P2_ridge_std"]["inside_fraction_pct_per_axis"]
+        for x, y in zip(p1, p2):
+            if y:
+                pool.add(x / y)
     return pool
 
 
