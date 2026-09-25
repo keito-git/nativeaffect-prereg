@@ -1,0 +1,14 @@
+# Results and activations are NOT tracked (size); they live on the server and in
+# the project tree under 03_解析/. This repo exists to timestamp the
+# pre-registrations and the code that implements them.
+*.npz
+*.pt
+*.safetensors
+03_解析/**/*.json
+!03_解析/preregistration/*.json
+pos_ctrl*/
+axes_nopad/
+ica_nopad/
+activations*/
+.DS_Store
+__pycache__/
