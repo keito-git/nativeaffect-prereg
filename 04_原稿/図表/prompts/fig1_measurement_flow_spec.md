@@ -14,7 +14,8 @@
 
 1. **刺激**: 2種類を分けて描く
    - E1（287 sentences, naturalistic）→ 整合の推定に使う
-   - E4（40 stimuli, 20 categories x 2 polarities）→ 介入に使う。
+   - E4（40 stimuli, 20 categories x 2 template variants;
+     10 positive categories / 10 negative categories）→ 介入に使う。
      **discovery 20 / confirmation 20 に分割されることを明示**
 2. **活性抽出**: decoder layers 5 / 7 / 10 / 12 の **last-token hidden state**（2048-dim）
 3. **方向の構成**: この段が図の中心。**3系統が並列**であることを示す
