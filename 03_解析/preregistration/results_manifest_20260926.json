@@ -3,8 +3,8 @@
   "what_this_does_not_establish": "It does not establish when a result was produced. generated_utc is copied from inside each JSON and is only as trustworthy as the script that wrote it; mtime is deliberately not recorded. Only the commit date of this manifest is externally witnessed, and it bounds the bytes from above, not the computation.",
   "append_only": "Entries are keyed by (path, sha256). A path that reappears with different bytes is appended and the earlier entry is marked superseded; entries are never removed.",
   "generator": "python/phase10/make_results_manifest.py",
-  "last_updated_utc": "2026-09-26T11:38:20Z",
-  "n_files": 84,
+  "last_updated_utc": "2026-09-26T11:51:59Z",
+  "n_files": 85,
   "files": [
     {
       "path": "03_解析/_gate1_smoke/adj_discovery_validation.json",
@@ -585,6 +585,16 @@
       "tracked_in_git": false,
       "archived": false,
       "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/G1_jacobian/layer16.json",
+      "sha256": "1f787b95f220f9d5a39d1ba28c43ad6acccff4883d963311433513c9e6be177f",
+      "bytes": 1168899,
+      "generated_utc": "2026-09-26T11:49:46.481389+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:51:59Z"
     },
     {
       "path": "03_解析/plan_b/axis_extraction_cost_cpu.json",
