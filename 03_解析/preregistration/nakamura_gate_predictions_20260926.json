@@ -1,0 +1,35 @@
+{
+  "recorded_utc": "2026-09-26T13:45:00Z",
+  "author": "nakamura (experiments)",
+  "obligation": "plan_b_js_prereg_20260926.md section 8: 中村にも独立に予測を記録させる",
+  "recorded_before": "any G1 judgement statistic exists. The Jacobian stage has produced candidate directions for layers 11/16/22/27 and the exact PC-overlap diagnostics, and nothing else. No axis JS and no PMF floor draw has been computed.",
+  "independent_of": "野村の事前予測 (G1 45%, G2|G1 60%, G3|G2 70%, G4|G3 25%). Written without revising toward those numbers; where I differ, the reason is stated.",
+  "predictions": {
+    "G1_pass": 0.85,
+    "G2_pass_given_G1": 0.35,
+    "G3_pass_given_G2": 0.55,
+    "G4_pass_given_G3": 0.20
+  },
+  "reasoning": {
+    "G1_much_higher_than_the_coordinator": [
+      "The selection criterion and the outcome metric are now aligned. The candidates are the top eigenvectors of M = sum_i V_i V_i^T, where V_i spans the leading right singular directions of the layer-to-logits Jacobian. Those are, by construction, the directions that move the next-token logits most. The outcome is JS between next-token distributions. Selecting for output sensitivity and then measuring output change is close to measuring what was selected for.",
+      "The PMF floor is not selected for anything. It preserves the squared projections onto the principal components, randomises signs, permutes coefficients within eigenvalue bins and rotates the residual. None of those steps preserves the Jacobian sensitivity, so a profile-matched draw has the direction's variance profile but not its output leverage.",
+      "This is why B0 failing does not transfer. B0's statistic S measured cross-stimulus consistency of the shift direction, which the selection did not optimise. The current pairing does not have that mismatch."
+    ],
+    "why_G1_passing_would_be_weak_evidence": [
+      "G1 selects and tests on the SAME 144 discovery stimuli. The ten directions are the top eigenvectors of M computed on those stimuli; the floor draws are not chosen on them. So the comparison is biased toward passing, by an amount nobody has estimated.",
+      "Addendum 13 is what makes this tolerable: candidate construction is confined to the discovery half and G2 opens the confirmation half. G1 is therefore an in-sample screen, not evidence of generalisation.",
+      "Consequence for the paper: G1 passing should be reported as 'the selection is not vacuous', not as 'the axes have causal specificity'. The claim rests on G2."
+    ],
+    "G2_lower_than_the_coordinator": [
+      "The coordinator's 60% assumes the G1 effect largely carries over. I expect most of the G1 margin to be selection bias, which does not carry over by definition.",
+      "Prior evidence points the same way: with the old axes, 11 of 12 cells lost to the in-plane floor at the primary alpha, and the one survivor was a single cell.",
+      "What would change my mind is cell identity: if the specific (layer, axis) cells that pass in discovery are the ones that pass in confirmation, that is much harder to explain by selection noise than any single p-value."
+    ],
+    "G3": "Roughly the coordinator's number, slightly lower. High-dimensional regression onto three human VAD directions will give a small R^2 almost regardless, which the registration itself warns about, so passing G3 is easy and means little on its own.",
+    "G4": "Close to the coordinator's. Beating five post-2023 methods on accuracy per token is a different and much harder problem than showing a direction is not floor-equivalent."
+  },
+  "what_would_make_me_wrong_about_G1": "If the PMF floor happens to preserve output leverage more than I expect - for instance if sensitivity is largely determined by the variance profile after all - the axes and the floor will be indistinguishable and G1 fails. Prediction P failing (mean principal cosine 0.109-0.134) is weak evidence against that, since it shows the sensitivity directions are not the variance directions.",
+  "arms": "The prediction is for the pass condition as registered: satisfied in EITHER the additive arm or the reflection arm. I expect the additive arm to pass more easily, because its perturbation size scales with the stimulus norm while the reflection's magnitude is set by the projection the direction already has.",
+  "no_revision_rule": "This file is not edited after a judgement statistic exists. If I want to say something different later, it goes in a new file with its own timestamp."
+}
