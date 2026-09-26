@@ -1,0 +1,858 @@
+{
+  "what_this_is": "Identity record for the result files of the NativeAffect project. Result JSONs are excluded by .gitignore, so this tracked manifest fixes their bytes as of the commit that records them.",
+  "what_this_does_not_establish": "It does not establish when a result was produced. generated_utc is copied from inside each JSON and is only as trustworthy as the script that wrote it; mtime is deliberately not recorded. Only the commit date of this manifest is externally witnessed, and it bounds the bytes from above, not the computation.",
+  "append_only": "Entries are keyed by (path, sha256). A path that reappears with different bytes is appended and the earlier entry is marked superseded; entries are never removed.",
+  "generator": "python/phase10/make_results_manifest.py",
+  "last_updated_utc": "2026-09-26T11:38:20Z",
+  "n_files": 84,
+  "files": [
+    {
+      "path": "03_解析/_gate1_smoke/adj_discovery_validation.json",
+      "sha256": "282bea6987e7766f8b693939de9ce333e625e727395e909adc39708af5dc7f74",
+      "bytes": 31046,
+      "generated_utc": "2026-09-25T20:58:32.397712+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/_gate1_smoke/inplane_floor_discovery_20260925T204855Z.json",
+      "sha256": "73dc751cabae51b00f800c40c2f88a66c247908eae4cee864bd7fa14221e4cd7",
+      "bytes": 13809,
+      "generated_utc": "2026-09-25T20:49:13.576360+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/_gate1_smoke/pos_ctrl_inplane_discovery_20260925T204921Z.json",
+      "sha256": "3ef58a13e7190b55e02f1d97cbaf5b4b9661bc9dcf47c9dbf9f97b20b708cee2",
+      "bytes": 11021,
+      "generated_utc": "2026-09-25T20:49:34.167977+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/_server_archives/c1_archive_main_sweep_20260925_053514/intervention_layer05_seed0042.json",
+      "sha256": "3ec8e1d86b23376c7e197ee867e0ccfc7a2a8dc1bc1abe3ded8da87253efcc00",
+      "bytes": 1406419,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/_server_archives/c1_archive_main_sweep_20260925_053514/intervention_layer07_seed0042.json",
+      "sha256": "30c6ac79b4497169217e25143252f566bc555e672b42ae19f1439ce275147ea7",
+      "bytes": 1552866,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/_server_archives/c1_archive_main_sweep_20260925_053514/intervention_layer10_seed0042.json",
+      "sha256": "c1a81ce266744aec48b280d92675b38b690364414ec75eb818ccc234ef175e62",
+      "bytes": 1553416,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/_server_archives/c1_archive_main_sweep_20260925_053514/intervention_layer12_seed0042.json",
+      "sha256": "dbf2b969ad00395a0d6cdd2636b14367e2f4f40e0efa04608efcf86534fc433a",
+      "bytes": 1553494,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/_server_archives/c1_archive_main_sweep_20260925_053514/summary_seed0042.json",
+      "sha256": "dfac853f677e6b6cc234bf006702afb23bbc24036586fb350e6aef7d79455494",
+      "bytes": 202245,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axes_nopad/alignment_primary.json",
+      "sha256": "463b0461cd793c1f8536f4acf7300a72067b8f3bfbc07252e37104bcfab8dc40",
+      "bytes": 11706,
+      "generated_utc": "2026-09-25T17:05:27.184254+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axes_nopad/axis_damage_report_20260925T110342Z.json",
+      "sha256": "8182fe478363f1ca938f01078beb431748170ed3824ad5e12eca7e61f66436b2",
+      "bytes": 19169,
+      "generated_utc": "2026-09-25T11:07:27.712563+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axes_nopad/axis_rebuilt_split_20260925.json",
+      "sha256": "e2c9d65bd3807c0439147c45b1bcbe2134f14d2f1fc32ec736c900a3ca4abefa",
+      "bytes": 2049,
+      "generated_utc": "2026-09-25",
+      "generated_utc_source": "JSON field 'created_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axes_nopad/preflight_subspace_conditioning.json",
+      "sha256": "9bd43e270dd53e88735f8c80d24cba24c8741de44a4a064684bfffbd96d3fb7d",
+      "bytes": 5956,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axes_nopad/procedure_dependence.json",
+      "sha256": "49ef829a0ef3d5e59a93ea00823500655e899408dde3bdece93a530de24cb146",
+      "bytes": 30045,
+      "generated_utc": "2026-09-25T16:41:39.853280+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axes_nopad/s2_subspace_p1_vs_p2.json",
+      "sha256": "1b9ad80272f8d68c74dbbeb5691094bbb8ad7f86ce00c3645297f6a4848c1c43",
+      "bytes": 16310,
+      "generated_utc": "2026-09-25T16:58:54.190044+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axes_nopad/s3_categories.json",
+      "sha256": "0d6e1556c7c39c2fe69400ff7fbfddd29fc748a86d1d26fe7666c6f24c2a8638",
+      "bytes": 59613,
+      "generated_utc": "2026-09-25T17:34:00.756450+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axes_nopad/seed_stability_c3.json",
+      "sha256": "e76d713d125cd4050684cd1455ebc8813f0850e13b4c46a04e04fa0fda319e14",
+      "bytes": 9450,
+      "generated_utc": "2026-09-25T18:40:49.573980+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axes_nopad/vad_correlations.json",
+      "sha256": "7fdbc0004416188961a21345cb5ba273ffaaf45ffe3935dc92d5e990ed4271ca",
+      "bytes": 3459,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axis_residual/axis_residual_discovery_20260925T113636Z.json",
+      "sha256": "a80aec6e1c08aa95c1cad4c53fb6d5824c70811895fb4247ed01284d49187117",
+      "bytes": 239075,
+      "generated_utc": "2026-09-25T11:41:36.916773+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axis_residual_v2/axis_residual_v2_discovery_20260925T152604Z.json",
+      "sha256": "4fa877d51556101725da9d45f34e14a553a859c75965753cecb296b702e30fab",
+      "bytes": 761205,
+      "generated_utc": "2026-09-25T15:33:33.144184+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axis_stability/_archive_bugfix_20260924/swiss-ai__Apertus-v1_1-1_5B/layer07_seed0042.json",
+      "sha256": "0e2a715d7cee39d0f9347a1ca70c722e4beb48d0afd7e2f1e890c077ba0c56cf",
+      "bytes": 3630,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axis_stability/_archive_bugfix_20260924/swiss-ai__Apertus-v1_1-1_5B/layer10_seed0042.json",
+      "sha256": "7c9d7bae933d9edce3e872ca999c9241ccba6de2b024437207e2879d1a357221",
+      "bytes": 3934,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axis_stability/_archive_bugfix_20260924/swiss-ai__Apertus-v1_1-1_5B/layer12_seed0042.json",
+      "sha256": "08ffa62973856c215ae855987503c6dce504f873c4b2d48c26d4d022057495e7",
+      "bytes": 9163,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axis_stability/swiss-ai__Apertus-v1_1-1_5B/layer05_seed0042.json",
+      "sha256": "3165f40be6337d45451737188af87c0527e1baccff09830a4d3b4c245ed5df0a",
+      "bytes": 5333,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axis_stability/swiss-ai__Apertus-v1_1-1_5B/layer07_seed0042.json",
+      "sha256": "22a5a612cb742d86840de8de0cf26992093a17e4198f12bbfca160f82c6d495d",
+      "bytes": 3605,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axis_stability/swiss-ai__Apertus-v1_1-1_5B/layer10_seed0042.json",
+      "sha256": "dc52e1042d358ac2a07575e1436df9388390b2761cd620e4190dfedff0f080c8",
+      "bytes": 3889,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/axis_stability/swiss-ai__Apertus-v1_1-1_5B/layer12_seed0042.json",
+      "sha256": "62c9948b2931d7c7c5f5a7e6c4403cd496f0437089669aee653172d2a02fcdc8",
+      "bytes": 9074,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/c1/mistralai__Mistral-7B-v0_3/intervention_layer16_seed0042.json",
+      "sha256": "29237b980a597b1f24b86c62e63daddaf1611ab9503569c8c7f6dac336623ef1",
+      "bytes": 45452,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/c1/mistralai__Mistral-7B-v0_3/summary_seed0042.json",
+      "sha256": "13749cace8074dfbb0a4bb22dad25e4f734428deb14f2e2e1e2570abefd831de",
+      "bytes": 2709,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/c1/swiss-ai__Apertus-v1_1-1_5B/intervention_layer05_seed0042.json",
+      "sha256": "3ec8e1d86b23376c7e197ee867e0ccfc7a2a8dc1bc1abe3ded8da87253efcc00",
+      "bytes": 1406419,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/c1/swiss-ai__Apertus-v1_1-1_5B/intervention_layer05_seed0042_axis_descriptions.json",
+      "sha256": "40585e6bccdd7776f0c5420553b498a679c2b53f4ba543ea768d47560c6c55c9",
+      "bytes": 4579,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/c1/swiss-ai__Apertus-v1_1-1_5B/intervention_layer07_seed0042.json",
+      "sha256": "30c6ac79b4497169217e25143252f566bc555e672b42ae19f1439ce275147ea7",
+      "bytes": 1552866,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/c1/swiss-ai__Apertus-v1_1-1_5B/intervention_layer10_seed0042.json",
+      "sha256": "c1a81ce266744aec48b280d92675b38b690364414ec75eb818ccc234ef175e62",
+      "bytes": 1553416,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/c1/swiss-ai__Apertus-v1_1-1_5B/intervention_layer12_seed0042.json",
+      "sha256": "dbf2b969ad00395a0d6cdd2636b14367e2f4f40e0efa04608efcf86534fc433a",
+      "bytes": 1553494,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/c1/swiss-ai__Apertus-v1_1-1_5B/summary_seed0042.json",
+      "sha256": "dfac853f677e6b6cc234bf006702afb23bbc24036586fb350e6aef7d79455494",
+      "bytes": 202245,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/confirmation/adjudication_confirmation.json",
+      "sha256": "28ca13499b2dde0d5b213f3e85e71fa88b9235ff61f1bdda554984080908727b",
+      "bytes": 30960,
+      "generated_utc": "2026-09-25T21:12:11.912076+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/confirmation/inplane_floor_confirmation_20260925T210454Z.json",
+      "sha256": "836d456b1e0800fefd5934d0cbfdf406bf2c2a68793a2dcfee0afb1aacce769f",
+      "bytes": 224650,
+      "generated_utc": "2026-09-25T21:10:40.365141+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/confirmation/pos_ctrl_inplane_confirmation_20260925T210056Z.json",
+      "sha256": "ec3ee467a4307aa1fe11ef2a1520915b53847c21d536afa2cae20a9218a940cb",
+      "bytes": 164161,
+      "generated_utc": "2026-09-25T21:04:46.542314+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/_archive_bugfix_20260924/mistralai__Mistral-7B-v0_3/layer16_seed0042_K07.json",
+      "sha256": "93b55e3981a18a641e7d3d62b5c8da0eb8a12992e4ead783e592d30837232ccf",
+      "bytes": 652729,
+      "generated_utc": "2026-09-24T12:24:23.564390+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/_archive_bugfix_20260924/mistralai__Mistral-7B-v0_3/layer20_seed0042_K05.json",
+      "sha256": "5427e1df288e2f4156086a551c7b6539e24761e35c7e1db35c670031ace44625",
+      "bytes": 468016,
+      "generated_utc": "2026-09-24T12:24:34.998873+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/_archive_bugfix_20260924/swiss-ai__Apertus-v1_1-1_5B/layer05_seed0042_K20.json",
+      "sha256": "45a9028ee7d1876b20b8ac402e77ca5bfeb55afd0fac3a3fa3b19814d2d7185a",
+      "bytes": 921101,
+      "generated_utc": "2026-09-24T13:06:48.667556+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/_archive_bugfix_20260924/swiss-ai__Apertus-v1_1-1_5B/layer07_seed0042_K10.json",
+      "sha256": "dd7bf5facb2740c9a7e52878a1e1d294da0b3fff7865b9e0706a1a090bfd25e7",
+      "bytes": 464086,
+      "generated_utc": "2026-09-24T13:06:53.526575+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/_archive_bugfix_20260924/swiss-ai__Apertus-v1_1-1_5B/layer10_seed0042_K18.json",
+      "sha256": "4361a255b96a3855477b7d1144b1aa66bf4e8b6ad20504b62849e0d655556761",
+      "bytes": 829606,
+      "generated_utc": "2026-09-24T13:06:58.067570+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/_archive_bugfix_20260924/swiss-ai__Apertus-v1_1-1_5B/layer12_seed0042_K14.json",
+      "sha256": "0d3a994ff422056511b9cb97becce3975c1d744e841352f2ad64377b0e88f0e9",
+      "bytes": 647026,
+      "generated_utc": "2026-09-24T13:07:02.808812+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": true,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/mistralai__Mistral-7B-v0_3/layer16_seed0042_K07.json",
+      "sha256": "93b55e3981a18a641e7d3d62b5c8da0eb8a12992e4ead783e592d30837232ccf",
+      "bytes": 652729,
+      "generated_utc": "2026-09-24T12:24:23.564390+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/mistralai__Mistral-7B-v0_3/layer20_seed0042_K05.json",
+      "sha256": "5427e1df288e2f4156086a551c7b6539e24761e35c7e1db35c670031ace44625",
+      "bytes": 468016,
+      "generated_utc": "2026-09-24T12:24:34.998873+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/swiss-ai__Apertus-v1_1-1_5B/layer05_seed0042_K20.json",
+      "sha256": "b3022f556e3a88249647a68c5b270a0f31c9de9717354a7512926b683aaa7bc6",
+      "bytes": 921046,
+      "generated_utc": "2026-09-24T13:21:11.320499+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/swiss-ai__Apertus-v1_1-1_5B/layer07_seed0042_K10.json",
+      "sha256": "54be199edf84a5a89cfd4c5f00d9836156ef9212fdbc431c34ccf6950d11209a",
+      "bytes": 464069,
+      "generated_utc": "2026-09-24T13:21:17.555471+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/swiss-ai__Apertus-v1_1-1_5B/layer10_seed0042_K18.json",
+      "sha256": "1a5c081d21527b70629c131591dacf22f14293c506c713b0c36513f34445986a",
+      "bytes": 830880,
+      "generated_utc": "2026-09-24T13:21:22.683822+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica/swiss-ai__Apertus-v1_1-1_5B/layer12_seed0042_K14.json",
+      "sha256": "87a2a954be89ee257df69ded713569ba81130615b07ab80514f9184735c8163f",
+      "bytes": 647796,
+      "generated_utc": "2026-09-24T13:21:27.314782+00:00",
+      "generated_utc_source": "JSON field 'manifest.timestamp_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica_nopad/swiss-ai__Apertus-v1_1-1_5B/layer05_seed0042_K06.json",
+      "sha256": "583df1c1fdeb348b90f349deaba40e4dce9923005486a5903d9f074b9d4050fe",
+      "bytes": 281784,
+      "generated_utc": "2026-09-25T11:04:05.538889+00:00",
+      "generated_utc_source": "JSON field 'manifest.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica_nopad/swiss-ai__Apertus-v1_1-1_5B/layer07_seed0042_K08.json",
+      "sha256": "3735c9c443a7199f118f31872eb6cc28b572e372a53ab22e6b3e19f7df84d9fc",
+      "bytes": 373637,
+      "generated_utc": "2026-09-25T11:04:55.510913+00:00",
+      "generated_utc_source": "JSON field 'manifest.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica_nopad/swiss-ai__Apertus-v1_1-1_5B/layer10_seed0042_K05.json",
+      "sha256": "b61769af4038fe52698fb05a70b2dc37b84f49b84a22746206a7e43855bf3b95",
+      "bytes": 234780,
+      "generated_utc": "2026-09-25T11:05:45.830768+00:00",
+      "generated_utc_source": "JSON field 'manifest.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/ica_nopad/swiss-ai__Apertus-v1_1-1_5B/layer12_seed0042_K19.json",
+      "sha256": "795bc85112c9fc8dec7bb3c8f04e417e883efb78c9b15fa9fd8207d7963bf544",
+      "bytes": 876132,
+      "generated_utc": "2026-09-25T11:06:39.941059+00:00",
+      "generated_utc_source": "JSON field 'manifest.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/inplane_floor/inplane_floor_discovery_20260925T172110Z.json",
+      "sha256": "8377e15514a9639e28dfbc4faee6d4da02871f3a66e3f072cbf8dafbe9ae38f9",
+      "bytes": 225475,
+      "generated_utc": "2026-09-25T17:28:36.865620+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/noise_axis_record_20260925.json",
+      "sha256": "b2d0d4e9537225b52c02ebb62236fec3f166aa14f2de49f74e998e333c21db68",
+      "bytes": 2563,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/B0/B0_positive_control_20260925T231218Z.json",
+      "sha256": "fb60845b98d3f347349a5087514aebee6fe4a303ee831592472e89e029f509e6",
+      "bytes": 46736,
+      "generated_utc": "2026-09-25T23:19:08.229205+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/E1_diag/E1_diagnostic_20260926T040754Z.json",
+      "sha256": "492cb19cd74276aa4ac51281b301a885c86659f753ba0b457439ea862c046d78",
+      "bytes": 18539,
+      "generated_utc": "2026-09-26T04:09:29.422879+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/G1_jacobian/layer11.json",
+      "sha256": "e894e7cfa2dc094876f4f295f9a7b57a9d3a519101f2852ea129824e415c69cd",
+      "bytes": 1170691,
+      "generated_utc": "2026-09-26T11:30:26.204075+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/axis_extraction_cost_cpu.json",
+      "sha256": "34f3955160354cfb5386c1c20179e14273808959ea7c5caa7cc8dcb46e6caedd",
+      "bytes": 349,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/e1_split_20260926.json",
+      "sha256": "4ec9f7eb5726ee872960f1c30a27e0dc3c320ceb644d864ac775de776c2e98f3",
+      "bytes": 9909,
+      "generated_utc": "2026-09-26T11:03:16.623297+00:00",
+      "generated_utc_source": "JSON field 'created_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/g4_precondition.json",
+      "sha256": "6e45deddb0df14f739c90e198badda189efdf89f4e1bc962d7e5ef63fd91adf8",
+      "bytes": 1339,
+      "generated_utc": "2026-09-26T04:22:24.063202+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/g4_precondition_qwen3_8b.json",
+      "sha256": "efc51e99cee6550656d8b4c5fda3cc686c87ad74008f7e46081ba95c23bcd83a",
+      "bytes": 1355,
+      "generated_utc": "2026-09-26T06:02:15.160164+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/gpu_cost_probe_qwen3_8b.json",
+      "sha256": "f4153cdee8a8f89e62ac7a2e894a22359f4151c4d059846e35d4e02ea045aa33",
+      "bytes": 907,
+      "generated_utc": "2026-09-26T06:42:00.062557+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/gsm8k_difficulty_strata.json",
+      "sha256": "c5b5e2e060693abc2024042c469269a896daab32cc6d944cc924153f4873bf38",
+      "bytes": 1431,
+      "generated_utc": "2026-09-26T04:40:02.622766+00:00",
+      "generated_utc_source": "JSON field 'created_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "self_declared": {
+        "canonical_location": "03_解析/preregistration/gsm8k_difficulty_strata.json in the nativeaffect-prereg repository. The copy under 03_解析/plan_b/ in the project tree is a working copy; .gitignore excludes it, so the tracked one is authoritative.",
+        "computed_before_any_G4_measurement": true
+      },
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/jacobian_cost_probe.json",
+      "sha256": "4da5cf1df54f569fa4861710df2a1cd7275ddf41028fd57cbf8437b01f35ab4a",
+      "bytes": 1036,
+      "generated_utc": "2026-09-26T06:40:15.975493+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/layer_mapping_qwen3_8b.json",
+      "sha256": "a69e40ac67b2d4faf8786c8074ee82d4e61da054c2122e1a54ffc4a0b030d527",
+      "bytes": 2208,
+      "generated_utc": "2026-09-26T06:09:33.206128+00:00",
+      "generated_utc_source": "JSON field 'created_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "self_declared": {
+        "canonical_location": "03_解析/preregistration/layer_mapping_qwen3_8b.json in the nativeaffect-prereg repository. The copy under 03_解析/plan_b/ in the project tree is a working copy; .gitignore excludes it, so the tracked one is authoritative.",
+        "computed_before_G1": true
+      },
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/math_data_provenance.json",
+      "sha256": "3dff398f29ef268074f719c40bb728190175a452e1881b5442f3e3897189d184",
+      "bytes": 6405,
+      "generated_utc": "2026-09-26T04:31:46.745033+00:00",
+      "generated_utc_source": "JSON field 'created_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/qwen3_8b_gate_checks.json",
+      "sha256": "90142b7397d1a7ae92e2ee2255f6c4661204c805692e478b4329242e29c08f0f",
+      "bytes": 1447,
+      "generated_utc": "2026-09-26T05:56:57.574789+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/plan_b/timing_probe.json",
+      "sha256": "f95b456b38580dfc335195b5e6f365a7ff1173fc9a562bca17c7a49fbcbcb88b",
+      "bytes": 1195,
+      "generated_utc": "2026-09-26T04:01:55.774444+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/pos_ctrl_inplane/pos_ctrl_inplane_20260925T182241Z.json",
+      "sha256": "0d1d33dfaa74e149ea610c602f89c7d68d9618b9a006c0141ff57b54851f3b6e",
+      "bytes": 80473,
+      "generated_utc": "2026-09-25T18:27:35.011545+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/pos_ctrl_inplane_seeds/pos_ctrl_inplane_floorseed42_20260925T191612Z.json",
+      "sha256": "5d5ed9609c194e6b93563ea0880b1c8082d6f331bd7383e1daaeb414f037a291",
+      "bytes": 163753,
+      "generated_utc": "2026-09-25T19:21:18.527072+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/pos_ctrl_inplane_seeds/pos_ctrl_inplane_floorseed43_20260925T192126Z.json",
+      "sha256": "2f8ddab6bb876af067216b6993fb51315abe014c593d136719bb9a941c4bac37",
+      "bytes": 163785,
+      "generated_utc": "2026-09-25T19:26:40.277995+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/pos_ctrl_inplane_seeds/pos_ctrl_inplane_floorseed44_20260925T192648Z.json",
+      "sha256": "f9013276c88ff6dbb36df5f1af2838503214c611ddb95ebe30a81b14aa35dd36",
+      "bytes": 163770,
+      "generated_utc": "2026-09-25T19:31:58.728458+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/pos_ctrl_inplane_seeds/pos_ctrl_inplane_floorseed45_20260925T193207Z.json",
+      "sha256": "0509c128a84cef5cb2abdf805ab3b0e705835f159cde0712cf8421fd3c0cbe18",
+      "bytes": 163591,
+      "generated_utc": "2026-09-25T19:37:25.771742+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/pos_ctrl_inplane_seeds/pos_ctrl_inplane_floorseed46_20260925T193734Z.json",
+      "sha256": "22f96d359af90a913666fb7c3b9ecfccab034cd71e06eca3d09ea7d3ec3a60de",
+      "bytes": 164278,
+      "generated_utc": "2026-09-25T19:42:49.992282+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/pos_ctrl_v2/pos_ctrl_v2_20260925T104919Z.json",
+      "sha256": "d559cb08c6567475b5a38fc11972f38c6d9f0ab58332f6420722ede625aa822a",
+      "bytes": 163792,
+      "generated_utc": "2026-09-25T10:53:12.180713+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/pos_ctrl_v3_newaxes/pos_ctrl_v2_20260925T111716Z.json",
+      "sha256": "8e517ef46c730eab221d664c5d97673bb864d0a720e892be0f0c0c68136090ec",
+      "bytes": 330076,
+      "generated_utc": "2026-09-25T11:24:11.795653+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/reaggregated/c1_judgefree_mainsweep_20260925T065455Z.json",
+      "sha256": "27df6b8464d3c7865f9f019dd3770e40341500f96e4bbf58a5ea7672829d949e",
+      "bytes": 106228,
+      "generated_utc": "2026-09-25T06:54:55.620315+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/response_inverse/v7_response_inverse_L5_s42_1790297966.json",
+      "sha256": "a744352f14d00484b4c5c76c4c0405fe190666b6785483e2b964dc8e9269f36d",
+      "bytes": 293385,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/response_inverse/v7_response_inverse_L5_s42_1790298098.json",
+      "sha256": "ab2720ab797a8610858f108ec3492cd0aa41f493933eabd40b65e4a7cbb9a0f1",
+      "bytes": 294418,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/response_inverse/v7_response_inverse_L5_s42_1790298185.json",
+      "sha256": "736bf60e3cfc67ed7ff7d0e344dddcc7973f3c23dabdbfc7620145b021973e8b",
+      "bytes": 294358,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/response_inverse/v7_response_inverse_L5_s42_1790298905.json",
+      "sha256": "c11d9e3d5137848ff77f9b05317730bd904bbedf9a45590e8da4e967bd8c2db2",
+      "bytes": 294481,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/signed_valence/signed_valence_20260925T200619Z.json",
+      "sha256": "b1f6cc61530e9282d252694e29f8f623bd7f8db2d7a8e5bdfb91a82878c70145",
+      "bytes": 134688,
+      "generated_utc": "2026-09-25T20:11:56.287198+00:00",
+      "generated_utc_source": "JSON field 'env.generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    },
+    {
+      "path": "03_解析/surgical_efficiency_record_20260925.json",
+      "sha256": "52c2446995629c40136cf817789a41b23bf49dedd3db9a4e7c8256af36ee2c08",
+      "bytes": 3853,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
+    }
+  ]
+}
