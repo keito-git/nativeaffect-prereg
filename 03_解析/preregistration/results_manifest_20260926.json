@@ -3,8 +3,8 @@
   "what_this_does_not_establish": "It does not establish when a result was produced. generated_utc is copied from inside each JSON and is only as trustworthy as the script that wrote it; mtime is deliberately not recorded. Only the commit date of this manifest is externally witnessed, and it bounds the bytes from above, not the computation.",
   "append_only": "Entries are keyed by (path, sha256). A path that reappears with different bytes is appended and the earlier entry is marked superseded; entries are never removed.",
   "generator": "python/phase10/make_results_manifest.py",
-  "last_updated_utc": "2026-09-26T13:15:42Z",
-  "n_files": 94,
+  "last_updated_utc": "2026-09-26T13:30:14Z",
+  "n_files": 100,
   "files": [
     {
       "path": "03_解析/_gate1_smoke/adj_discovery_validation.json",
@@ -587,6 +587,16 @@
       "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
     },
     {
+      "path": "03_解析/plan_b/G1_jacobian/layer11_Vi.npy",
+      "sha256": "c5c81254f6d0bbd27df2da8816911d5bac63ef2602ec5827e0e8daa7f5b9941a",
+      "bytes": 23593088,
+      "generated_utc": null,
+      "generated_utc_source": "not applicable (binary .npy carries no timestamp)",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:29:30Z"
+    },
+    {
       "path": "03_解析/plan_b/G1_jacobian/layer11_progress.json",
       "sha256": "08365be5594ae32cad4d6b93edf3851186226b3f3571799955ee4ea94d9db253",
       "bytes": 44,
@@ -605,6 +615,16 @@
       "tracked_in_git": false,
       "archived": false,
       "first_recorded_in_manifest_utc": "2026-09-26T11:51:59Z"
+    },
+    {
+      "path": "03_解析/plan_b/G1_jacobian/layer16_Vi.npy",
+      "sha256": "996165a41c2e199b4b6600a2a9cd89e27efbdc7f2ba0ee0e6434b9b97da87f5d",
+      "bytes": 23593088,
+      "generated_utc": null,
+      "generated_utc_source": "not applicable (binary .npy carries no timestamp)",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:29:30Z"
     },
     {
       "path": "03_解析/plan_b/G1_jacobian/layer16_progress.json",
@@ -627,6 +647,16 @@
       "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z"
     },
     {
+      "path": "03_解析/plan_b/G1_jacobian/layer22_Vi.npy",
+      "sha256": "9cd7552226deeb606e541c3e28df3bbc57b0ecb452761c5df486453cb44ab91b",
+      "bytes": 23593088,
+      "generated_utc": null,
+      "generated_utc_source": "not applicable (binary .npy carries no timestamp)",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:29:30Z"
+    },
+    {
       "path": "03_解析/plan_b/G1_jacobian/layer22_progress.json",
       "sha256": "3e5d733dd8feefb7de1c421378aed269cec9834e1eb4b1ccabf664dd2318c3a0",
       "bytes": 44,
@@ -647,6 +677,16 @@
       "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z"
     },
     {
+      "path": "03_解析/plan_b/G1_jacobian/layer27_Vi.npy",
+      "sha256": "75245b7d74bab260543ea629f9a2c462ab3b6c4e9f83308b1431ae33316a3705",
+      "bytes": 23593088,
+      "generated_utc": null,
+      "generated_utc_source": "not applicable (binary .npy carries no timestamp)",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:29:30Z"
+    },
+    {
       "path": "03_解析/plan_b/G1_jacobian/layer27_progress.json",
       "sha256": "444e747e6fa935305d76f54a3bb468562e2f04f0f840b54d11a3329e38703e76",
       "bytes": 44,
@@ -657,6 +697,26 @@
       "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z"
     },
     {
+      "path": "03_解析/plan_b/G1_jacobian/pc_overlap_exact.json",
+      "sha256": "a2b55ecdea12930a090be491b30d52e1bdc053c444e481a76c5969dd23a112ed",
+      "bytes": 27410,
+      "generated_utc": "2026-09-26T13:20:10.262978+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:29:30Z"
+    },
+    {
+      "path": "03_解析/plan_b/G1_jacobian/prediction_p_verdict.json",
+      "sha256": "3f48cfba2c8a9bf84f70cca14598886ad9cd6ac16de69d75ec3057956e41e99a",
+      "bytes": 4655,
+      "generated_utc": "2026-09-26T13:22:39.004946+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:29:30Z"
+    },
+    {
       "path": "03_解析/plan_b/G1_jacobian/prediction_p_verdict.json",
       "sha256": "71592041df0b84dd2459e1385980dcf4edb349049f4e6bc6e7d5e3f94d722382",
       "bytes": 3923,
@@ -664,7 +724,8 @@
       "generated_utc_source": "JSON field 'generated_utc'",
       "tracked_in_git": false,
       "archived": false,
-      "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z"
+      "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z",
+      "superseded": true
     },
     {
       "path": "03_解析/plan_b/axis_extraction_cost_cpu.json",
