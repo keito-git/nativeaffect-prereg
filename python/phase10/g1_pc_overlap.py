@@ -47,20 +47,27 @@ Usage
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 import numpy as np
 
 RANK = 10
-PC_K = 10
-SEED = 20260926
-MODEL = "Qwen/Qwen3-8B"
-OUTDIR = Path("/path/to/work/results/plan_b/G1_jacobian")
-E1 = Path("/path/to/work/data/e1_stimuli.json")
-SPLIT = Path("/path/to/work/results/plan_b/e1_split_20260926.json")
+
+# Paths, seed, model and the activation hook are IMPORTED from g1_jacobian at run
+# time, never restated here. A second copy of the stimulus path or of the hook
+# would be a second chance to diverge from the file that produced the layers --
+# the same defect as the nine copied JS functions. Importing also makes the
+# reproduction guard meaningful: it then tests the PCA and the overlap maths,
+# not whether two hand-written hooks happen to agree.
+# (My first draft did restate them, and had the stimulus path wrong:
+#  /path/to/work/data/e1_stimuli.json instead of
+#  /path/to/work/code/stimuli/stimuli_e1.json.)
+G1_CODE_DIR = Path("/path/to/work/code/phase10")
 
 
 def variance_along(X: np.ndarray, dirs: np.ndarray, pcs: np.ndarray,
@@ -187,7 +194,8 @@ def self_test() -> None:
     # 5. the bound actually used in the interim report
     mx = np.array([0.1368, 0.0804, 0.0599, 0.1727, 0.0815,
                    0.0825, 0.0875, 0.1557, 0.0779, 0.0683])   # layer 11, stored
-    ub = float(np.sqrt((PC_K * mx ** 2).sum() / PC_K))
+    n_pc_l11 = 10                      # n_pcs_used as recorded in layer11.json
+    ub = float(np.sqrt((n_pc_l11 * mx ** 2).sum() / n_pc_l11))
     ck("layer-11 bound on the mean principal cosine is 0.3386",
        abs(ub - 0.3386) < 5e-4)
     ck("that bound is below the registered 0.70 threshold", ub < 0.70)
@@ -237,7 +245,8 @@ def self_test() -> None:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--layers", type=int, nargs="+", default=[11, 16, 22, 27])
-    ap.add_argument("--out-dir", type=Path, default=OUTDIR)
+    ap.add_argument("--out-dir", type=Path,
+                    default=Path("/path/to/work/results/plan_b/G1_jacobian"))
     ap.add_argument("--tol", type=float, default=1e-6)
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
@@ -254,18 +263,33 @@ def main() -> int:
     from sklearn.decomposition import PCA               # noqa: PLC0415
     from transformers import AutoModelForCausalLM, AutoTokenizer  # noqa: PLC0415
 
-    split = json.loads(SPLIT.read_text())
-    e1 = json.loads(E1.read_text())
+    sys.path.insert(0, str(G1_CODE_DIR))
+    import g1_jacobian as g1                            # noqa: PLC0415
+    print(f"imported {g1.__file__}")
+    print(f"  sha256 {hashlib.sha256(Path(g1.__file__).read_bytes()).hexdigest()}")
+    MODEL, PC_K, SEED = g1.MODEL, g1.PC_K, g1.SEED
+
+    split = json.loads(g1.SPLIT.read_text())
+    if split.get("defined_before_any_G1_judgement") is not True:
+        raise SystemExit("REFUSING: the split does not assert that it was defined "
+                         "before any G1 judgement")
+    e1 = json.loads(g1.E1.read_text())
     disc = list(split["discovery_indices"])
     texts = [e1[i]["text"] for i in disc]
     if len(texts) != 144:
         raise SystemExit(f"REFUSING: expected 144 discovery sentences, got {len(texts)}")
 
     tok = AutoTokenizer.from_pretrained(MODEL)
+    if tok.pad_token is None:
+        tok.pad_token = tok.eos_token
     model = AutoModelForCausalLM.from_pretrained(
         MODEL, torch_dtype=torch.float16, device_map="auto",
-        low_cpu_mem_usage=True, attn_implementation="eager")
+        low_cpu_mem_usage=True, attn_implementation=g1.ATTN_IMPL)
     model.eval()
+    for prm in model.parameters():
+        prm.requires_grad_(False)
+    dev = next(model.parameters()).device
+    dec = model.model.layers
 
     out: dict = {"generated_utc": datetime.now(timezone.utc).isoformat(),
                  "purpose": ("exact principal angles and inside_fraction; the "
@@ -280,23 +304,11 @@ def main() -> int:
         rec = json.loads(rec_path.read_text())
         dirs = np.asarray(rec["sensitivity_directions"], dtype=np.float64)
 
-        acts = []
-        for t in texts:
-            enc = tok(t, return_tensors="pt").to(model.device)
-            got: list = []
-            h = model.model.layers[L].register_forward_hook(
-                lambda _m, _i, o, g=got: g.append(
-                    o[0][0, -1].detach().float().cpu().numpy()))
-            try:
-                with torch.no_grad():
-                    model(**enc)
-            finally:
-                h.remove()
-            acts.append(got[0])
-        X = np.stack(acts).astype(np.float64)
+        # the SAME activation function that produced the layers
+        X = np.stack([g1._act(model, tok, dec, L, t_, dev) for t_ in texts])
 
         n_pc = min(PC_K, X.shape[0] - 1, X.shape[1])
-        fit = PCA(n_components=n_pc, random_state=SEED).fit(X)
+        fit = PCA(n_components=n_pc, random_state=SEED).fit(X.astype(np.float64))
         pcs = fit.components_
         st = overlap_stats(pcs, dirs)
         st["variance"] = variance_along(X, dirs, pcs, fit.explained_variance_)

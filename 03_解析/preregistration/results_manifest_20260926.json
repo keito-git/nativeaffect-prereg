@@ -3,8 +3,8 @@
   "what_this_does_not_establish": "It does not establish when a result was produced. generated_utc is copied from inside each JSON and is only as trustworthy as the script that wrote it; mtime is deliberately not recorded. Only the commit date of this manifest is externally witnessed, and it bounds the bytes from above, not the computation.",
   "append_only": "Entries are keyed by (path, sha256). A path that reappears with different bytes is appended and the earlier entry is marked superseded; entries are never removed.",
   "generator": "python/phase10/make_results_manifest.py",
-  "last_updated_utc": "2026-09-26T12:30:27Z",
-  "n_files": 87,
+  "last_updated_utc": "2026-09-26T13:15:42Z",
+  "n_files": 94,
   "files": [
     {
       "path": "03_解析/_gate1_smoke/adj_discovery_validation.json",
@@ -587,6 +587,16 @@
       "first_recorded_in_manifest_utc": "2026-09-26T11:38:20Z"
     },
     {
+      "path": "03_解析/plan_b/G1_jacobian/layer11_progress.json",
+      "sha256": "08365be5594ae32cad4d6b93edf3851186226b3f3571799955ee4ea94d9db253",
+      "bytes": 44,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z"
+    },
+    {
       "path": "03_解析/plan_b/G1_jacobian/layer16.json",
       "sha256": "1f787b95f220f9d5a39d1ba28c43ad6acccff4883d963311433513c9e6be177f",
       "bytes": 1168899,
@@ -595,6 +605,66 @@
       "tracked_in_git": false,
       "archived": false,
       "first_recorded_in_manifest_utc": "2026-09-26T11:51:59Z"
+    },
+    {
+      "path": "03_解析/plan_b/G1_jacobian/layer16_progress.json",
+      "sha256": "4196caff241e22d8da0b0d544c08a772f2afcee19aa257721e0a4803d020ccd4",
+      "bytes": 44,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z"
+    },
+    {
+      "path": "03_解析/plan_b/G1_jacobian/layer22.json",
+      "sha256": "fe6f3b1562b3e8a909496e2a130bd52749fdf448ce68056abc0ec18f886da8f2",
+      "bytes": 1168864,
+      "generated_utc": "2026-09-26T12:06:00.166543+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z"
+    },
+    {
+      "path": "03_解析/plan_b/G1_jacobian/layer22_progress.json",
+      "sha256": "3e5d733dd8feefb7de1c421378aed269cec9834e1eb4b1ccabf664dd2318c3a0",
+      "bytes": 44,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z"
+    },
+    {
+      "path": "03_解析/plan_b/G1_jacobian/layer27.json",
+      "sha256": "c90d99345bfb87348149617bb54f85c45bc4cfadbd82f26ef9a085704e48251c",
+      "bytes": 1169502,
+      "generated_utc": "2026-09-26T12:19:31.105354+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z"
+    },
+    {
+      "path": "03_解析/plan_b/G1_jacobian/layer27_progress.json",
+      "sha256": "444e747e6fa935305d76f54a3bb468562e2f04f0f840b54d11a3329e38703e76",
+      "bytes": 44,
+      "generated_utc": null,
+      "generated_utc_source": "absent from the JSON",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z"
+    },
+    {
+      "path": "03_解析/plan_b/G1_jacobian/prediction_p_verdict.json",
+      "sha256": "71592041df0b84dd2459e1385980dcf4edb349049f4e6bc6e7d5e3f94d722382",
+      "bytes": 3923,
+      "generated_utc": "2026-09-26T13:11:21.742489+00:00",
+      "generated_utc_source": "JSON field 'generated_utc'",
+      "tracked_in_git": false,
+      "archived": false,
+      "first_recorded_in_manifest_utc": "2026-09-26T13:15:42Z"
     },
     {
       "path": "03_解析/plan_b/axis_extraction_cost_cpu.json",

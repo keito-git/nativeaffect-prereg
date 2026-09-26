@@ -32,12 +32,41 @@ _CVD = os.environ.get("CUDA_VISIBLE_DEVICES")
 MODEL = "Qwen/Qwen3-8B"
 LAYERS = (11, 16, 22, 27)
 E1 = Path("/path/to/work/code/stimuli/stimuli_e1.json")
+SPLIT = Path("/path/to/work/results/plan_b/e1_split_20260926.json")
 OUTDIR = Path("/path/to/work/results/plan_b/G1_jacobian")
 RANK, OVERSAMPLE, POWER = 10, 10, 2
 PC_K = 10
 SEED = 20260926
 PREREG = "1078240"
 ATTN_IMPL = "eager"
+
+
+_SUF = ("s", "es", "ed", "ing", "ly")
+VADCSV = Path("/path/to/work/affectgeometry/data/vad_norms/warriner_2013_en_vad.csv")
+
+
+def _load_vad() -> set:
+    import csv
+    out = set()
+    with VADCSV.open() as fh:
+        for r in csv.DictReader(fh):
+            try:
+                float(r["valence"]); out.add(r["word"].strip().lower())
+            except (KeyError, TypeError, ValueError):
+                continue
+    return out
+
+
+def _has_vad(text: str, vad: set) -> bool:
+    """Same lookup rule as the rest of the pipeline, suffix backoff included."""
+    import re
+    for w in re.findall(r"[a-zA-Z']+", text.lower()):
+        if w in vad:
+            return True
+        for s in _SUF:
+            if w.endswith(s) and len(w) - len(s) >= 3 and w[:-len(s)] in vad:
+                return True
+    return False
 
 
 def _ops(model, tok, dec, L, enc, dev):
@@ -158,6 +187,8 @@ def finish_layer(L: int, out_dir: Path, n: int, d: int, X: np.ndarray) -> dict:
     return {"prereg_commit": PREREG, "addendum": "12", "layer": L,
             "generated_utc": datetime.now(timezone.utc).isoformat(),
             "n_stimuli": n, "d": d, "rank": RANK,
+            "pca_and_direction_rows": "E1 discovery half only (addendum 13)",
+            "split_file": str(SPLIT), "split_group": "discovery",
             "combination_rule": "M = sum_i V_i V_i^T; top eigenvectors of M",
             "why_this_rule": ("projection matrices are sign invariant, so v and "
                               "-v cannot cancel, and stimuli are equally weighted"),
@@ -193,10 +224,20 @@ def main() -> int:
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
     a.out_dir.mkdir(parents=True, exist_ok=True)
-    texts = [s["text"] for s in json.loads(E1.read_text())]
+    # Addendum 13: candidate directions and the PMF basis come from the
+    # DISCOVERY half of E1 only. Computing them from all 287 would put
+    # confirmation data into the selection.
+    e1 = json.loads(E1.read_text())
+    split = json.loads(SPLIT.read_text())
+    assert split.get("defined_before_any_G1_judgement") is True
+    disc = list(split["discovery_indices"])
+    texts = [e1[i]["text"] for i in disc]
     if a.n_stimuli:
         texts = texts[:a.n_stimuli]
     n = len(texts)
+    if not a.n_stimuli and n != 144:
+        raise SystemExit(f"REFUSING: expected the {len(disc)} discovery "
+                         f"sentences of the E1 split (addendum 13), got {n}")
     tok = AutoTokenizer.from_pretrained(MODEL)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
