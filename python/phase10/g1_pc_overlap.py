@@ -63,6 +63,42 @@ E1 = Path("/path/to/work/data/e1_stimuli.json")
 SPLIT = Path("/path/to/work/results/plan_b/e1_split_20260926.json")
 
 
+def variance_along(X: np.ndarray, dirs: np.ndarray, pcs: np.ndarray,
+                   evr: np.ndarray) -> dict:
+    """Variance of the activations along each direction, in comparable units.
+
+    A direction EXACTLY orthogonal to the top-k PC span cannot have variance
+    above lambda_k -- PCA's optimality forbids it -- so exact orthogonality would
+    settle the quadrant claim of addendum 1 A2 (low variance, high sensitivity)
+    on its own. Our directions are not exactly orthogonal: with inside_fraction f
+    the variance only obeys var <= f*lambda_1 + (1-f)*lambda_k, and lambda_1 is
+    orders above lambda_k, so a modest f puts it back above lambda_k. The
+    variance is therefore measured here rather than inferred from the overlap.
+    """
+    Xc = X - X.mean(axis=0, keepdims=True)
+    n = max(Xc.shape[0] - 1, 1)
+    var_dir = (Xc @ dirs.T) ** 2
+    var_dir = var_dir.sum(axis=0) / n                   # (r,)
+    var_pc = (Xc @ pcs.T) ** 2
+    var_pc = var_pc.sum(axis=0) / n                     # (k,)
+    total = float((Xc ** 2).sum() / n)
+    return {
+        "variance_along_direction": [float(v) for v in var_dir],
+        "variance_along_top_pcs": [float(v) for v in var_pc],
+        "total_variance": total,
+        "fraction_of_total_variance_per_direction":
+            [float(v / total) for v in var_dir],
+        "ratio_to_pc10_variance":
+            [float(v / max(var_pc[-1], 1e-30)) for v in var_dir],
+        "n_directions_below_pc10_variance":
+            int(sum(1 for v in var_dir if v < var_pc[-1])),
+        "explained_variance_ratio_top_pcs": [float(v) for v in evr],
+        "note": ("a direction below PC10's variance sits in the low-variance "
+                 "half of the quadrant plot; above it, it does not, whatever its "
+                 "overlap with the PC span"),
+    }
+
+
 def overlap_stats(pcs: np.ndarray, dirs: np.ndarray) -> dict:
     """C, principal cosines, and inside_fraction. pcs (k,d) and dirs (r,d) orthonormal."""
     G = pcs @ dirs.T                               # (k, r) SIGNED inner products
@@ -156,6 +192,43 @@ def self_test() -> None:
        abs(ub - 0.3386) < 5e-4)
     ck("that bound is below the registered 0.70 threshold", ub < 0.70)
 
+    # 6. The true relation, which an earlier version of this test got backwards.
+    #    A direction exactly orthogonal to the top-k PC span CANNOT have variance
+    #    above lambda_k: if it did, swapping it into the span would raise the
+    #    explained variance, contradicting PCA's optimality. So exact
+    #    orthogonality does place a direction in the low-variance half. What it
+    #    does not do is survive partial overlap: variance along a unit direction
+    #    with inside_fraction f obeys var <= f*lambda_1 + (1-f)*lambda_k, and with
+    #    lambda_1 >> lambda_k even a modest f lifts it above lambda_k. That is why
+    #    the variance is measured rather than inferred.
+    k = 3
+    Xs = rng.standard_normal((400, d)) * 0.01
+    basis = np.linalg.qr(rng.standard_normal((d, d)))[0]
+    for j in range(k):
+        Xs += np.outer(rng.standard_normal(400) * (10.0 - 3.0 * j), basis[:, j])
+    quiet = basis[:, k + 5]
+    Xs += np.outer(rng.standard_normal(400) * 1.0, quiet)
+    from sklearn.decomposition import PCA as _PCA
+    f3 = _PCA(n_components=k, random_state=0).fit(Xs)
+    st6 = overlap_stats(f3.components_, quiet[None, :])
+    v6 = variance_along(Xs, quiet[None, :], f3.components_, f3.explained_variance_)
+    ck("orthogonal to the top PCs => inside_fraction ~ 0",
+       st6["inside_fraction_max"] < 1e-3)
+    ck("orthogonal to the top PCs => variance at or below PC-k (PCA optimality)",
+       v6["ratio_to_pc10_variance"][0] <= 1.0 + 1e-9
+       and v6["n_directions_below_pc10_variance"] == 1)
+
+    # partial overlap with the loudest PC lifts it back above lambda_k
+    mixed = 0.45 * f3.components_[0] + np.sqrt(1 - 0.45 ** 2) * quiet
+    mixed /= np.linalg.norm(mixed)
+    st7 = overlap_stats(f3.components_, mixed[None, :])
+    v7 = variance_along(Xs, mixed[None, :], f3.components_, f3.explained_variance_)
+    ck("partial overlap (f~0.2) lifts the variance back above PC-k",
+       0.1 < st7["inside_fraction_max"] < 0.35
+       and v7["ratio_to_pc10_variance"][0] > 1.0)
+    ck("=> the quadrant claim needs the measured variance, not orthogonality alone",
+       v7["n_directions_below_pc10_variance"] == 0)
+
     print(f"\nself-test: {len(fails)} failure(s)")
     if fails:
         raise SystemExit(1)
@@ -223,8 +296,10 @@ def main() -> int:
         X = np.stack(acts).astype(np.float64)
 
         n_pc = min(PC_K, X.shape[0] - 1, X.shape[1])
-        pcs = PCA(n_components=n_pc, random_state=SEED).fit(X).components_
+        fit = PCA(n_components=n_pc, random_state=SEED).fit(X)
+        pcs = fit.components_
         st = overlap_stats(pcs, dirs)
+        st["variance"] = variance_along(X, dirs, pcs, fit.explained_variance_)
 
         # Reproduction guard: the entrywise summaries must match what was stored.
         C = np.array(st["C_entrywise_abs_cos"])
