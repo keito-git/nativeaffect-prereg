@@ -1,0 +1,47 @@
+{
+  "note": "E5 骨格パイロット v3。結末を短縮し共有部分を増やした。残る語彙差は層0 ベースラインで統制する（除去ではなく測定）。",
+  "design": {
+    "principle": "骨格を固定し結末だけ変える。残る語彙差は層0（埋め込み層）を共変量として差し引く",
+    "lexical_control": "同一モデルの層0 は語の同一性を持つが Transformer の計算を持たない。層L のカテゴリ構造が層0 を超える分だけが計算の寄与である",
+    "why_layer0": "論文1 が『部分空間分離は layer 0 に既在』を報告済み。語の同一性だけで感情構造の相当部分が説明される。増分を測らなければ何も言えない",
+    "status": "未検証。NLI 分離条件（Δ>=0.15）をこれから通す"
+  },
+  "skeletons": [
+    {
+      "id": "sk1",
+      "label": "検査結果の受領",
+      "domain": "medical",
+      "shared_frame": "She opened the letter from the clinic and read the single line stating that the result was",
+      "items": [
+        {"category": "joyful",   "id": "e5_sk1_joy", "ending": "clear and that no further visits were needed."},
+        {"category": "relieved", "id": "e5_sk1_rel", "ending": "normal and that the earlier figure had been wrong."},
+        {"category": "anxious",  "id": "e5_sk1_anx", "ending": "pending and that a second sample was required."},
+        {"category": "dejected", "id": "e5_sk1_dej", "ending": "steady and that the previous three rounds matched."}
+      ]
+    },
+    {
+      "id": "sk2",
+      "label": "他者の成果を知る",
+      "domain": "workplace",
+      "shared_frame": "He read that a colleague from his year had been named to the chair, and he recalled that she had",
+      "items": [
+        {"category": "envious",  "id": "e5_sk2_env", "ending": "entered the field in the same month as he."},
+        {"category": "jealous",  "id": "e5_sk2_jea", "ending": "invited his closest collaborator to join her group."},
+        {"category": "proud",    "id": "e5_sk2_pro", "ending": "brought him her first draft in that same office."},
+        {"category": "grateful", "id": "e5_sk2_gra", "ending": "entered his name for the committee years before."}
+      ]
+    },
+    {
+      "id": "sk3",
+      "label": "自分の過失の発覚",
+      "domain": "professional_error",
+      "shared_frame": "The error in his section of the report was found during the review, and the record showed that",
+      "items": [
+        {"category": "ashamed",     "id": "e5_sk3_ash", "ending": "he had signed the section without reading it."},
+        {"category": "guilty",      "id": "e5_sk3_gui", "ending": "the client had used the figure for two quarters."},
+        {"category": "embarrassed", "id": "e5_sk3_emb", "ending": "it had been read aloud with him in the room."},
+        {"category": "dejected",    "id": "e5_sk3_dej", "ending": "it had been returned to him for the fourth time."}
+      ]
+    }
+  ]
+}
