@@ -1,0 +1,914 @@
+{
+  "note": "E5 全骨格。骨格を固定し結末だけ変える。語彙差は層0 ベースラインで統制する（追記40）。",
+  "version": "full-v4",
+  "created": "2026-10-04",
+  "design": {
+    "principle": "検定したくないもの（話題）を対照で固定し、感情だけを動かす",
+    "within_skeleton": "主語・場面・時制・前半の節を共有。変えるのは結末のみ",
+    "analysis": "骨格内でカテゴリを比較する。骨格間の差は固定効果として除く",
+    "lexical_control": "同一モデルの層0 を語彙ベースラインとし、増分 CS(L)-CS(0) で主張する",
+    "status": "未検証。語彙スキャンは通過済み。NLI 分離条件（Δ>=0.15）はこれから"
+  },
+  "skeletons": [
+    {
+      "id": "sk1",
+      "label": "検査結果の受領",
+      "domain": "medical",
+      "shared_frame": "She opened the letter from the clinic and read the single line stating that the result was",
+      "items": [
+        {
+          "category": "joyful",
+          "ending": "clear and that no further visits were needed."
+        },
+        {
+          "category": "relieved",
+          "ending": "normal and that the earlier figure had been wrong."
+        },
+        {
+          "category": "anxious",
+          "ending": "pending and that a second sample was required."
+        },
+        {
+          "category": "dejected",
+          "ending": "steady and that the previous three rounds matched."
+        },
+        {
+          "category": "terrified",
+          "ending": "urgent and that she should come in that evening."
+        },
+        {
+          "category": "confused",
+          "ending": "listed twice and that the two entries disagreed."
+        }
+      ]
+    },
+    {
+      "id": "sk2",
+      "label": "他者の成果を知る",
+      "domain": "workplace",
+      "shared_frame": "He read that a colleague from his year had been named to the chair, and he recalled that she had",
+      "items": [
+        {
+          "category": "envious",
+          "ending": "entered the field in the same month as he."
+        },
+        {
+          "category": "jealous",
+          "ending": "invited his closest collaborator to join her group."
+        },
+        {
+          "category": "proud",
+          "ending": "brought him her first draft in that same office."
+        },
+        {
+          "category": "grateful",
+          "ending": "entered his name for the committee years before."
+        },
+        {
+          "category": "bored",
+          "ending": "held the same two posts for eleven straight years."
+        },
+        {
+          "category": "surprised",
+          "ending": "left the field entirely for a decade before returning."
+        }
+      ]
+    },
+    {
+      "id": "sk3",
+      "label": "自分の過失の発覚",
+      "domain": "professional_error",
+      "shared_frame": "The error in his section of the report was found during the review, and the record showed that",
+      "items": [
+        {
+          "category": "ashamed",
+          "ending": "he had signed the section without reading it."
+        },
+        {
+          "category": "guilty",
+          "ending": "the client had used the figure for two quarters."
+        },
+        {
+          "category": "embarrassed",
+          "ending": "it had been read aloud with him in the room."
+        },
+        {
+          "category": "dejected",
+          "ending": "it had been returned to him for the fourth time."
+        },
+        {
+          "category": "relieved",
+          "ending": "the version sent to the client had been corrected."
+        },
+        {
+          "category": "frustrated",
+          "ending": "the same template had produced it three times before."
+        }
+      ]
+    },
+    {
+      "id": "sk4",
+      "label": "旧居の訪問",
+      "domain": "personal_place",
+      "shared_frame": "She stopped at the house where she had lived as a child and saw that the front room was now",
+      "items": [
+        {
+          "category": "melancholic",
+          "ending": "arranged exactly as it had been that last winter."
+        },
+        {
+          "category": "nostalgic",
+          "ending": "painted the colour her mother had chosen in spring."
+        },
+        {
+          "category": "sad",
+          "ending": "stripped bare with the floor taken up for removal."
+        },
+        {
+          "category": "content",
+          "ending": "filled with another family eating at the table."
+        },
+        {
+          "category": "lonely",
+          "ending": "shuttered and dark with no name on the door."
+        },
+        {
+          "category": "serene",
+          "ending": "open to the garden with the windows standing wide."
+        }
+      ]
+    },
+    {
+      "id": "sk5",
+      "label": "予定外の遅延",
+      "domain": "travel",
+      "shared_frame": "The train stopped between stations and the guard announced that the delay would be",
+      "items": [
+        {
+          "category": "anxious",
+          "ending": "long enough that her connection would be missed."
+        },
+        {
+          "category": "frustrated",
+          "ending": "the third of its kind on that line this week."
+        },
+        {
+          "category": "calm",
+          "ending": "brief and that the service would resume shortly."
+        },
+        {
+          "category": "bored",
+          "ending": "unknown and that no further notice would follow."
+        },
+        {
+          "category": "panicked",
+          "ending": "indefinite and that the doors would stay sealed."
+        },
+        {
+          "category": "hopeful",
+          "ending": "shorter than the one posted at the platform earlier."
+        }
+      ]
+    },
+    {
+      "id": "sk6",
+      "label": "作業中の異常",
+      "domain": "laboratory",
+      "shared_frame": "Halfway through the procedure he noticed that the reading on the instrument had",
+      "items": [
+        {
+          "category": "curious",
+          "ending": "settled at a value no one had recorded before."
+        },
+        {
+          "category": "confused",
+          "ending": "moved in the direction opposite to every prior run."
+        },
+        {
+          "category": "anxious",
+          "ending": "crossed the threshold the manual warned against."
+        },
+        {
+          "category": "panicked",
+          "ending": "climbed past the end of the printed scale."
+        },
+        {
+          "category": "satisfied",
+          "ending": "landed on the figure he had predicted that morning."
+        },
+        {
+          "category": "excited",
+          "ending": "repeated the pattern from the paper he had just read."
+        }
+      ]
+    },
+    {
+      "id": "sk7",
+      "label": "久しぶりの再会",
+      "domain": "personal_relationship",
+      "shared_frame": "He met her at the station after eleven years apart and found that she",
+      "items": [
+        {
+          "category": "joyful",
+          "ending": "had brought the photograph from their last summer."
+        },
+        {
+          "category": "loved",
+          "ending": "had kept every letter he had sent that year."
+        },
+        {
+          "category": "melancholic",
+          "ending": "spoke of the town in the past tense throughout."
+        },
+        {
+          "category": "embarrassed",
+          "ending": "repeated the remark he had made and regretted."
+        },
+        {
+          "category": "awe-struck",
+          "ending": "had crossed four continents on foot since then."
+        },
+        {
+          "category": "disappointed",
+          "ending": "had forgotten the name of the street they shared."
+        }
+      ]
+    },
+    {
+      "id": "sk8",
+      "label": "長い待機の終了",
+      "domain": "administrative",
+      "shared_frame": "After two years the office wrote to say that the application had been",
+      "items": [
+        {
+          "category": "relieved",
+          "ending": "accepted and that no further documents were needed."
+        },
+        {
+          "category": "ecstatic",
+          "ending": "ranked first out of the four hundred submitted."
+        },
+        {
+          "category": "hopeless",
+          "ending": "refused and that no further appeal was available."
+        },
+        {
+          "category": "satisfied",
+          "ending": "approved on the terms he had asked for originally."
+        },
+        {
+          "category": "disappointed",
+          "ending": "approved for half the period he had requested."
+        },
+        {
+          "category": "enthusiastic",
+          "ending": "approved and that the work could begin that month."
+        },
+        {
+          "category": "elated",
+          "ending": "selected and that the award would be announced publicly."
+        }
+      ]
+    },
+    {
+      "id": "sk9",
+      "label": "規範からの逸脱を目撃",
+      "domain": "public_norm",
+      "shared_frame": "At the meeting she watched the senior member speak over the speaker and then",
+      "items": [
+        {
+          "category": "disgusted",
+          "ending": "take the paper from her hand without asking."
+        },
+        {
+          "category": "contemptuous",
+          "ending": "claim the analysis as his own in the minutes."
+        },
+        {
+          "category": "furious",
+          "ending": "dismiss the objection with a wave of his hand."
+        },
+        {
+          "category": "surprised",
+          "ending": "apologise at length once the room had emptied."
+        },
+        {
+          "category": "amused",
+          "ending": "lose his place entirely and read the wrong page."
+        },
+        {
+          "category": "angry",
+          "ending": "repeat the interruption three more times that hour."
+        }
+      ]
+    },
+    {
+      "id": "sk10",
+      "label": "作業の完了",
+      "domain": "craft",
+      "shared_frame": "He set down the tools and looked at the piece he had worked on for six months, which was",
+      "items": [
+        {
+          "category": "satisfied",
+          "ending": "finished to the measurements he had drawn at the start."
+        },
+        {
+          "category": "proud",
+          "ending": "the first of its kind made in that workshop."
+        },
+        {
+          "category": "disappointed",
+          "ending": "short of the standard he had set for himself."
+        },
+        {
+          "category": "serene",
+          "ending": "quiet in the light with nothing left to adjust."
+        },
+        {
+          "category": "frustrated",
+          "ending": "warped along the join he had repaired four times."
+        },
+        {
+          "category": "content",
+          "ending": "ready for the shelf where it would stay."
+        }
+      ]
+    },
+    {
+      "id": "sk11",
+      "label": "提出物への講評",
+      "domain": "education",
+      "shared_frame": "She read the comment at the end of the returned assignment, which said that the work was",
+      "items": [
+        {
+          "category": "proud",
+          "ending": "the strongest the tutor had seen that term."
+        },
+        {
+          "category": "ashamed",
+          "ending": "copied in part from a source she had not cited."
+        },
+        {
+          "category": "disappointed",
+          "ending": "below the mark she had been given before."
+        },
+        {
+          "category": "confused",
+          "ending": "graded against criteria she had not been shown."
+        },
+        {
+          "category": "hopeful",
+          "ending": "close to the standard needed for the next stage."
+        },
+        {
+          "category": "frustrated",
+          "ending": "marked down for a format rule issued that morning."
+        }
+      ]
+    },
+    {
+      "id": "sk12",
+      "label": "夜間の物音",
+      "domain": "domestic",
+      "shared_frame": "He woke at two in the morning to a sound from the hallway and found that the door was",
+      "items": [
+        {
+          "category": "terrified",
+          "ending": "open with the lock broken from the outside."
+        },
+        {
+          "category": "anxious",
+          "ending": "shut but the chain was hanging loose."
+        },
+        {
+          "category": "relieved",
+          "ending": "closed and the sound had come from the pipes."
+        },
+        {
+          "category": "curious",
+          "ending": "open at an angle it had never rested at."
+        },
+        {
+          "category": "amused",
+          "ending": "nudged open by the cat sitting beside it."
+        },
+        {
+          "category": "calm",
+          "ending": "exactly as he had left it the night before."
+        }
+      ]
+    },
+    {
+      "id": "sk13",
+      "label": "長年の計画の帰結",
+      "domain": "life_course",
+      "shared_frame": "After nine years she closed the file on the project and recorded that the outcome had been",
+      "items": [
+        {
+          "category": "satisfied",
+          "ending": "within the range she had set out at the start."
+        },
+        {
+          "category": "hopeless",
+          "ending": "abandoned with no route left to continue it."
+        },
+        {
+          "category": "melancholic",
+          "ending": "reached long after the people who began it left."
+        },
+        {
+          "category": "ecstatic",
+          "ending": "beyond anything the original proposal had described."
+        },
+        {
+          "category": "serene",
+          "ending": "settled and the room could be cleared at last."
+        },
+        {
+          "category": "bored",
+          "ending": "identical to the one she had filed four times."
+        }
+      ]
+    },
+    {
+      "id": "sk14",
+      "label": "第三者の苦境を知る",
+      "domain": "social_other",
+      "shared_frame": "At the end of the shift she learned that the man from the night team had been",
+      "items": [
+        {
+          "category": "sad",
+          "ending": "carried out through the side entrance that evening."
+        },
+        {
+          "category": "guilty",
+          "ending": "covering the hours she had asked to be released from."
+        },
+        {
+          "category": "grateful",
+          "ending": "holding her position open through the whole period."
+        },
+        {
+          "category": "contemptuous",
+          "ending": "taking the credit for the work on her list."
+        },
+        {
+          "category": "lonely",
+          "ending": "the last person who had known her by name."
+        },
+        {
+          "category": "angry",
+          "ending": "told to leave with an hour of notice given."
+        }
+      ]
+    },
+    {
+      "id": "sk15",
+      "label": "自然の中での遭遇",
+      "domain": "nature",
+      "shared_frame": "She came over the ridge at first light and saw that the valley below was",
+      "items": [
+        {
+          "category": "awe-struck",
+          "ending": "filled end to end with a sea of cloud."
+        },
+        {
+          "category": "serene",
+          "ending": "still and the water held the shape of the sky."
+        },
+        {
+          "category": "disgusted",
+          "ending": "covered in waste left along the whole riverbank."
+        },
+        {
+          "category": "nostalgic",
+          "ending": "laid out as the old photograph had shown it."
+        },
+        {
+          "category": "surprised",
+          "ending": "under water where the road had run last year."
+        },
+        {
+          "category": "enthusiastic",
+          "ending": "open along a route no map had marked."
+        }
+      ]
+    },
+    {
+      "id": "sk16",
+      "label": "交渉の結末",
+      "domain": "negotiation",
+      "shared_frame": "The meeting ended after four hours and the note on the table recorded that the terms were",
+      "items": [
+        {
+          "category": "relieved",
+          "ending": "agreed and the matter would not go further."
+        },
+        {
+          "category": "furious",
+          "ending": "changed after he had already signed the first page."
+        },
+        {
+          "category": "contemptuous",
+          "ending": "the ones he had rejected twice that afternoon."
+        },
+        {
+          "category": "satisfied",
+          "ending": "close to the figure he had prepared for."
+        },
+        {
+          "category": "anxious",
+          "ending": "left open for a decision the following week."
+        },
+        {
+          "category": "excited",
+          "ending": "wider in scope than either side had proposed."
+        }
+      ]
+    },
+    {
+      "id": "sk17",
+      "label": "身体の変調",
+      "domain": "bodily",
+      "shared_frame": "Partway up the stairs he stopped and noticed that his breathing had",
+      "items": [
+        {
+          "category": "panicked",
+          "ending": "stopped matching the rhythm of any climb before."
+        },
+        {
+          "category": "anxious",
+          "ending": "shortened on a flight he climbed every day."
+        },
+        {
+          "category": "calm",
+          "ending": "steadied by the time he reached the landing."
+        },
+        {
+          "category": "confused",
+          "ending": "changed without any effort that would explain it."
+        },
+        {
+          "category": "relieved",
+          "ending": "returned to its usual rhythm within a minute."
+        },
+        {
+          "category": "terrified",
+          "ending": "no sound in it at all for several seconds."
+        }
+      ]
+    },
+    {
+      "id": "sk18",
+      "label": "子の報告を受ける",
+      "domain": "family",
+      "shared_frame": "Her daughter came home from the first week and told her that the class had been",
+      "items": [
+        {
+          "category": "joyful",
+          "ending": "the best part of every day so far."
+        },
+        {
+          "category": "loved",
+          "ending": "asking after her by name every single morning."
+        },
+        {
+          "category": "anxious",
+          "ending": "split and she had been put with no one known."
+        },
+        {
+          "category": "proud",
+          "ending": "given her the task of leading the group."
+        },
+        {
+          "category": "sad",
+          "ending": "short one seat and she had waited outside."
+        },
+        {
+          "category": "amused",
+          "ending": "taught by a man who sang every instruction."
+        }
+      ]
+    },
+    {
+      "id": "sk19",
+      "label": "公開された記録",
+      "domain": "public_record",
+      "shared_frame": "The archive went online in March and he found that his own file had been",
+      "items": [
+        {
+          "category": "embarrassed",
+          "ending": "published with the draft he never meant to send."
+        },
+        {
+          "category": "grateful",
+          "ending": "kept intact by someone through all the moves."
+        },
+        {
+          "category": "furious",
+          "ending": "edited to remove the part that named him."
+        },
+        {
+          "category": "nostalgic",
+          "ending": "stored beside the letters from that same year."
+        },
+        {
+          "category": "hopeless",
+          "ending": "lost in the transfer with no copy anywhere."
+        },
+        {
+          "category": "curious",
+          "ending": "filed under a name he did not recognise."
+        }
+      ]
+    },
+    {
+      "id": "sk20",
+      "label": "反復作業の最中",
+      "domain": "routine_work",
+      "shared_frame": "By the two hundredth entry of the afternoon she realised that the task had",
+      "items": [
+        {
+          "category": "bored",
+          "ending": "produced the same three values the whole time."
+        },
+        {
+          "category": "frustrated",
+          "ending": "reset twice and lost an hour of entries."
+        },
+        {
+          "category": "curious",
+          "ending": "begun returning values outside the expected band."
+        },
+        {
+          "category": "content",
+          "ending": "fallen into a rhythm she no longer had to watch."
+        },
+        {
+          "category": "excited",
+          "ending": "turned up the case the whole study had needed."
+        },
+        {
+          "category": "dejected",
+          "ending": "to be repeated from the start the next day."
+        }
+      ]
+    },
+    {
+      "id": "sk21",
+      "label": "競技の結果発表",
+      "domain": "competition",
+      "shared_frame": "The final standings went up on the board and she saw that her entry had been placed",
+      "items": [
+        {
+          "category": "ecstatic",
+          "ending": "first by a margin no one had expected."
+        },
+        {
+          "category": "elated",
+          "ending": "into the final round for the first time."
+        },
+        {
+          "category": "hopeful",
+          "ending": "just outside the cut with one event left."
+        },
+        {
+          "category": "envious",
+          "ending": "second to a rival who had trained half as long."
+        },
+        {
+          "category": "disappointed",
+          "ending": "below the line she had cleared in practice."
+        },
+        {
+          "category": "angry",
+          "ending": "last after a scoring change made that morning."
+        }
+      ]
+    },
+    {
+      "id": "sk22",
+      "label": "同居の一年",
+      "domain": "cohabitation",
+      "shared_frame": "After a year of sharing the flat he noticed that the other rooms were",
+      "items": [
+        {
+          "category": "lonely",
+          "ending": "empty every evening by the time he returned."
+        },
+        {
+          "category": "loved",
+          "ending": "kept warm and the meal was waiting again."
+        },
+        {
+          "category": "jealous",
+          "ending": "full of people she had met without him."
+        },
+        {
+          "category": "grateful",
+          "ending": "cleared of the work he had left for weeks."
+        },
+        {
+          "category": "content",
+          "ending": "quiet in a way that no longer bothered him."
+        },
+        {
+          "category": "angry",
+          "ending": "used for storage of things he had asked about."
+        }
+      ]
+    },
+    {
+      "id": "sk23",
+      "label": "公共の場での不正",
+      "domain": "public_transgression",
+      "shared_frame": "On the platform she watched the man take the seat reserved for others and then",
+      "items": [
+        {
+          "category": "disgusted",
+          "ending": "spit on the floor beside the waiting queue."
+        },
+        {
+          "category": "angry",
+          "ending": "push past the woman with the walking frame."
+        },
+        {
+          "category": "contemptuous",
+          "ending": "explain the rule to her as though she were slow."
+        },
+        {
+          "category": "ashamed",
+          "ending": "turn and find that she had said nothing at all."
+        },
+        {
+          "category": "guilty",
+          "ending": "ask her to confirm a claim she knew was false."
+        },
+        {
+          "category": "surprised",
+          "ending": "stand and offer it to the next person boarding."
+        }
+      ]
+    },
+    {
+      "id": "sk24",
+      "label": "新しい挑戦の開始",
+      "domain": "new_undertaking",
+      "shared_frame": "On the first morning of the programme he was told that the work ahead would be",
+      "items": [
+        {
+          "category": "enthusiastic",
+          "ending": "his own to shape from the first week on."
+        },
+        {
+          "category": "hopeful",
+          "ending": "hard but within reach by the end of the year."
+        },
+        {
+          "category": "anxious",
+          "ending": "assessed against a standard not yet written down."
+        },
+        {
+          "category": "excited",
+          "ending": "the first attempt anyone had made at the problem."
+        },
+        {
+          "category": "awe-struck",
+          "ending": "continuing a line begun two centuries before."
+        },
+        {
+          "category": "calm",
+          "ending": "much the same as what he had done before."
+        }
+      ]
+    },
+    {
+      "id": "sk25",
+      "label": "援助を受ける",
+      "domain": "receiving_help",
+      "shared_frame": "When the repairs were finished she learned that the cost had been",
+      "items": [
+        {
+          "category": "loved",
+          "ending": "covered by the neighbour who had said nothing."
+        },
+        {
+          "category": "grateful",
+          "ending": "reduced by a fund she had not known existed."
+        },
+        {
+          "category": "guilty",
+          "ending": "taken from money saved for his own treatment."
+        },
+        {
+          "category": "embarrassed",
+          "ending": "raised by a collection among her own students."
+        },
+        {
+          "category": "surprised",
+          "ending": "waived under a rule written forty years earlier."
+        },
+        {
+          "category": "content",
+          "ending": "settled within the sum she had put aside."
+        }
+      ]
+    },
+    {
+      "id": "sk26",
+      "label": "大きな対象に触れる",
+      "domain": "encounter_scale",
+      "shared_frame": "She stood at the entrance of the hall and found that the work on the far wall was",
+      "items": [
+        {
+          "category": "awe-struck",
+          "ending": "larger than any single room she had entered."
+        },
+        {
+          "category": "ecstatic",
+          "ending": "the one piece she had travelled nine years to see."
+        },
+        {
+          "category": "serene",
+          "ending": "lit so evenly that no edge showed anywhere."
+        },
+        {
+          "category": "disgusted",
+          "ending": "made of material taken from a site now ruined."
+        },
+        {
+          "category": "bored",
+          "ending": "the fourth version of the same arrangement there."
+        },
+        {
+          "category": "enthusiastic",
+          "ending": "open for anyone to add a panel that month."
+        }
+      ]
+    },
+    {
+      "id": "sk27",
+      "label": "配分の通知",
+      "domain": "allocation",
+      "shared_frame": "The list of awards was circulated on Friday and he saw that his share had been set",
+      "items": [
+        {
+          "category": "envious",
+          "ending": "at half of what the newer appointee received."
+        },
+        {
+          "category": "jealous",
+          "ending": "aside for the post he had been promised first."
+        },
+        {
+          "category": "elated",
+          "ending": "at triple the figure requested in the application."
+        },
+        {
+          "category": "satisfied",
+          "ending": "at exactly the level he had asked for."
+        },
+        {
+          "category": "furious",
+          "ending": "to zero without any notice being sent."
+        },
+        {
+          "category": "grateful",
+          "ending": "higher by someone who never put a name to it."
+        }
+      ]
+    },
+    {
+      "id": "sk28",
+      "label": "親密な関係の変化",
+      "domain": "close_relationship",
+      "shared_frame": "When he came back in the autumn he found that the place beside her had been",
+      "items": [
+        {
+          "category": "jealous",
+          "ending": "taken by the person she wrote about all summer."
+        },
+        {
+          "category": "envious",
+          "ending": "offered to someone with none of his years there."
+        },
+        {
+          "category": "elated",
+          "ending": "kept open with his name still on the card."
+        },
+        {
+          "category": "lonely",
+          "ending": "removed along with every trace of the arrangement."
+        },
+        {
+          "category": "loved",
+          "ending": "held for him through a season she spent alone."
+        },
+        {
+          "category": "melancholic",
+          "ending": "filled by a stranger who sat exactly as he had."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "A_situation/E5": {
+    "n": 169,
+    "within_skeleton_argmax": 56,
+    "within_rate": 0.33136094674556216,
+    "global_argmax": 18,
+    "global_rate": 0.10650887573964497,
+    "chance_global": 0.025,
+    "seconds": 73.15881061553955
+  },
+  "A_situation/E4": {
+    "n": 80,
+    "within_skeleton_argmax": 60,
+    "within_rate": 0.75,
+    "global_argmax": 60,
+    "global_rate": 0.75,
+    "chance_global": 0.025,
+    "seconds": 91.98880910873413
+  },
+  "B_person/E5": {
+    "n": 169,
+    "within_skeleton_argmax": 46,
+    "within_rate": 0.27218934911242604,
+    "global_argmax": 12,
+    "global_rate": 0.07100591715976332,
+    "chance_global": 0.025,
+    "seconds": 72.53689169883728
+  },
+  "B_person/E4": {
+    "n": 80,
+    "within_skeleton_argmax": 19,
+    "within_rate": 0.2375,
+    "global_argmax": 19,
+    "global_rate": 0.2375,
+    "chance_global": 0.025,
+    "seconds": 91.88847255706787
+  },
+  "C_she_feels/E5": {
+    "n": 169,
+    "within_skeleton_argmax": 38,
+    "within_rate": 0.22485207100591717,
+    "global_argmax": 9,
+    "global_rate": 0.05325443786982249,
+    "chance_global": 0.025,
+    "seconds": 72.46163654327393
+  },
+  "C_she_feels/E4": {
+    "n": 80,
+    "within_skeleton_argmax": 42,
+    "within_rate": 0.525,
+    "global_argmax": 42,
+    "global_rate": 0.525,
+    "chance_global": 0.025,
+    "seconds": 91.87155818939209
+  },
+  "D_bare/E5": {
+    "n": 169,
+    "within_skeleton_argmax": 47,
+    "within_rate": 0.2781065088757396,
+    "global_argmax": 15,
+    "global_rate": 0.08875739644970414,
+    "chance_global": 0.025,
+    "seconds": 72.5291976928711
+  },
+  "D_bare/E4": {
+    "n": 80,
+    "within_skeleton_argmax": 49,
+    "within_rate": 0.6125,
+    "global_argmax": 49,
+    "global_rate": 0.6125,
+    "chance_global": 0.025,
+    "seconds": 92.04232239723206
+  }
+}
