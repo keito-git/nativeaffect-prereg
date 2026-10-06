@@ -1,0 +1,217 @@
+{
+  "created": "2026-10-06",
+  "prereg": "amendment 70 (family C of the 16-concept inventory, amendment 47)",
+  "note": "Minimal pairs for event/social structure. Within C2 the verb is held identical and only the affected entity changes, so the contrast is animacy and not the action. No emotion words, so a concept direction can be estimated without presupposing emotion; 'affect' and its forms are treated as emotion words and avoided.",
+  "concepts": {
+    "C1_temporal_prospective": {
+      "family": "C",
+      "gloss": "past vs prospective",
+      "pairs": [
+        {
+          "minus": "The inspection took place last Tuesday.",
+          "plus": "The inspection takes place next Tuesday."
+        },
+        {
+          "minus": "She submitted the application on Friday.",
+          "plus": "She submits the application on Friday."
+        },
+        {
+          "minus": "The results were published in March.",
+          "plus": "The results will be published in March."
+        },
+        {
+          "minus": "He moved to the coastal office in spring.",
+          "plus": "He moves to the coastal office in spring."
+        },
+        {
+          "minus": "The contract expired at the end of June.",
+          "plus": "The contract expires at the end of June."
+        },
+        {
+          "minus": "They repaired the bridge over the weekend.",
+          "plus": "They repair the bridge over the weekend."
+        },
+        {
+          "minus": "The committee reviewed the proposal in May.",
+          "plus": "The committee reviews the proposal in May."
+        },
+        {
+          "minus": "The train left from the eastern platform.",
+          "plus": "The train leaves from the eastern platform."
+        },
+        {
+          "minus": "She completed the course in two months.",
+          "plus": "She completes the course in two months."
+        },
+        {
+          "minus": "The office relocated to the third floor.",
+          "plus": "The office relocates to the third floor."
+        },
+        {
+          "minus": "The audit covered the previous quarter.",
+          "plus": "The audit covers the coming quarter."
+        },
+        {
+          "minus": "He returned the equipment on Thursday.",
+          "plus": "He returns the equipment on Thursday."
+        },
+        {
+          "minus": "The policy changed at the start of April.",
+          "plus": "The policy changes at the start of April."
+        },
+        {
+          "minus": "They installed the sensors in the hallway.",
+          "plus": "They install the sensors in the hallway."
+        },
+        {
+          "minus": "The shipment arrived before the deadline.",
+          "plus": "The shipment arrives before the deadline."
+        },
+        {
+          "minus": "She renewed the licence in September.",
+          "plus": "She renews the licence in September."
+        }
+      ]
+    },
+    "C2_animacy_of_affected": {
+      "family": "C",
+      "gloss": "object vs person affected",
+      "pairs": [
+        {
+          "minus": "The falling branch struck a bicycle.",
+          "plus": "The falling branch struck a passer-by."
+        },
+        {
+          "minus": "The water reached the night-shift machinery.",
+          "plus": "The water reached the night-shift worker."
+        },
+        {
+          "minus": "The notice named the new building.",
+          "plus": "The notice named the new tenant."
+        },
+        {
+          "minus": "The report described the vehicle in detail.",
+          "plus": "The report described the driver in detail."
+        },
+        {
+          "minus": "The heat reached the rails on the platform.",
+          "plus": "The heat reached the people on the platform."
+        },
+        {
+          "minus": "The dust settled on the instruments.",
+          "plus": "The dust settled on the technicians."
+        },
+        {
+          "minus": "The decision transferred the archive to Leeds.",
+          "plus": "The decision transferred the clerk to Leeds."
+        },
+        {
+          "minus": "The rule applies to visiting equipment.",
+          "plus": "The rule applies to visiting researchers."
+        },
+        {
+          "minus": "The smoke reached the boxes upstairs.",
+          "plus": "The smoke reached the children upstairs."
+        },
+        {
+          "minus": "The inspection covered the kitchen fittings.",
+          "plus": "The inspection covered the kitchen staff."
+        },
+        {
+          "minus": "The update replaced the duty roster.",
+          "plus": "The update replaced the duty officer."
+        },
+        {
+          "minus": "The cold damaged the greenhouse.",
+          "plus": "The cold damaged the gardener."
+        },
+        {
+          "minus": "The siren reached the offices on floor two.",
+          "plus": "The siren reached the residents on floor two."
+        },
+        {
+          "minus": "The letter named her rented flat.",
+          "plus": "The letter named her younger brother."
+        },
+        {
+          "minus": "The current carried the timber downstream.",
+          "plus": "The current carried the swimmer downstream."
+        },
+        {
+          "minus": "The policy protects seasonal stockpiles.",
+          "plus": "The policy protects seasonal labourers."
+        }
+      ]
+    },
+    "C3_social_presence": {
+      "family": "C",
+      "gloss": "alone vs others present",
+      "pairs": [
+        {
+          "minus": "She read the notice alone in the corridor.",
+          "plus": "She read the notice with colleagues in the corridor."
+        },
+        {
+          "minus": "He waited by himself at the gate.",
+          "plus": "He waited among other passengers at the gate."
+        },
+        {
+          "minus": "The technician worked alone in the basement.",
+          "plus": "The technician worked with two others in the basement."
+        },
+        {
+          "minus": "She finished the form on her own.",
+          "plus": "She finished the form with a clerk beside her."
+        },
+        {
+          "minus": "He opened the package in an empty room.",
+          "plus": "He opened the package in a crowded room."
+        },
+        {
+          "minus": "The driver checked the load unaccompanied.",
+          "plus": "The driver checked the load with a supervisor."
+        },
+        {
+          "minus": "She rehearsed the talk by herself.",
+          "plus": "She rehearsed the talk before the team."
+        },
+        {
+          "minus": "He received the result in private.",
+          "plus": "He received the result before the class."
+        },
+        {
+          "minus": "The nurse recorded the reading alone.",
+          "plus": "The nurse recorded the reading with a trainee."
+        },
+        {
+          "minus": "She unpacked the delivery on her own.",
+          "plus": "She unpacked the delivery with two helpers."
+        },
+        {
+          "minus": "He reviewed the figures in a quiet office.",
+          "plus": "He reviewed the figures in an open meeting."
+        },
+        {
+          "minus": "The student sat the paper in an empty hall.",
+          "plus": "The student sat the paper in a full hall."
+        },
+        {
+          "minus": "She locked the gate with nobody present.",
+          "plus": "She locked the gate with others present."
+        },
+        {
+          "minus": "He made the call from an empty stairwell.",
+          "plus": "He made the call from a busy stairwell."
+        },
+        {
+          "minus": "The auditor counted the stock alone.",
+          "plus": "The auditor counted the stock with the manager."
+        },
+        {
+          "minus": "She collected the keys from an unstaffed desk.",
+          "plus": "She collected the keys from a staffed desk."
+        }
+      ]
+    }
+  }
+}
