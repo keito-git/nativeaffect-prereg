@@ -32,6 +32,16 @@ admission of error; two defects found in that check were corrected.
 
 Personal and team names were replaced by roles in the translations. Cited authors are unchanged.
 
+## Anonymisation
+
+The author identity was removed from every commit, and personal names, institutional names,
+repository URLs and file-system paths were replaced by neutral placeholders, so that the
+repository can be read during anonymous review. **Commit dates were not touched**: the order and
+the timing of the pre-registration, which is what the record is for, are intact. Commit hashes did
+change; `COMMIT_MAP.md` maps the hash an amendment cites to the commit that carries it now.
+
+Nothing that states a criterion, a measurement or a commitment was altered.
+
 ## Numbering
 
 Amendments run from 1 to 108 with 30 and 31 unused. Each file names, at its head, what it governs
