@@ -1,0 +1,65 @@
+{
+  "created_utc": "2026-09-26T06:09:33.206128+00:00",
+  "prereg_commit": "823ecdc",
+  "computed_before_G1": true,
+  "why": "layers 5/7/10/12 were chosen against Apertus-1.5B; on a 36-layer model they would sit far too shallow. Relative depth is the comparable coordinate: paper 1 found across 38 models that the peak of linear decodability moves between models and aligns on relative depth",
+  "rule_fixed_before_computing": "for each old layer take L/N_old and pick the new layer minimising |k/N_new - L/N_old|; ties resolved to the shallower layer. The rule is not changed if the result is inconvenient",
+  "old_model": {
+    "id": "swiss-ai/Apertus-v1.1-1.5B",
+    "num_hidden_layers": 16,
+    "hidden_size": 2048,
+    "layers_used": [
+      5,
+      7,
+      10,
+      12
+    ]
+  },
+  "new_model": {
+    "id": "Qwen/Qwen3-8B",
+    "num_hidden_layers": 36,
+    "hidden_size": 4096
+  },
+  "mapping": [
+    {
+      "old_layer": 5,
+      "old_relative_depth": 0.3125,
+      "new_layer": 11,
+      "new_relative_depth": 0.305556,
+      "abs_depth_error": 0.006944
+    },
+    {
+      "old_layer": 7,
+      "old_relative_depth": 0.4375,
+      "new_layer": 16,
+      "new_relative_depth": 0.444444,
+      "abs_depth_error": 0.006944
+    },
+    {
+      "old_layer": 10,
+      "old_relative_depth": 0.625,
+      "new_layer": 22,
+      "new_relative_depth": 0.611111,
+      "abs_depth_error": 0.013889
+    },
+    {
+      "old_layer": 12,
+      "old_relative_depth": 0.75,
+      "new_layer": 27,
+      "new_relative_depth": 0.75,
+      "abs_depth_error": 0.0
+    }
+  ],
+  "new_layers": [
+    11,
+    16,
+    22,
+    27
+  ],
+  "dimension_change": {
+    "from": 2048,
+    "to": 4096,
+    "ratio": 2.0
+  },
+  "split_file_unchanged": "axis_rebuilt_split_20260925.json is a split of the stimuli, not of the model, so it is reused as is"
+}

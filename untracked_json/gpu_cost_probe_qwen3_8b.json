@@ -1,0 +1,38 @@
+{
+  "generated_utc": "2026-09-26T06:42:00.062557+00:00",
+  "prereg_commit": "823ecdc",
+  "model": "Qwen/Qwen3-8B",
+  "layers": [
+    11,
+    16,
+    22,
+    27
+  ],
+  "hidden_size": 4096,
+  "purpose": "cost measurement only",
+  "activation_extraction": {
+    "n_sentences": 300,
+    "n_layers": 4,
+    "all_layers_in_one_pass": true,
+    "seconds_total": 8.1,
+    "seconds_per_sentence": 0.0269,
+    "peak_gpu_MiB": 15651,
+    "shape_per_layer": [
+      300,
+      4096
+    ]
+  },
+  "js_measurement": {
+    "n_stimuli": 20,
+    "polarities": 2,
+    "seconds_per_direction_per_layer": 0.94,
+    "seconds_per_forward": 0.0235,
+    "note": "baselines are computed once per layer and reused"
+  },
+  "js_projection": {
+    "seconds_per_direction_full_sweep_4layers_5alpha": 18.8,
+    "directions_for_20_candidates_hours": 0.1,
+    "directions_for_60_candidates_hours": 0.31
+  },
+  "peak_gpu_MiB_overall": 15651
+}

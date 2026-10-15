@@ -1,31 +1,46 @@
-# NativeAffect (paper 2) — pre-registrations and analysis code
+# NativeAffect — pre-registration, amendments and code
 
-Timestamping repository for the NativeAffect project (AI-native emotion axes).
-It holds the pre-registration documents and the code that implements them.
-**Results JSON and activation caches are deliberately not tracked** (size); they
-live on the GPU server under `/path/to/work/results/` and are mirrored into
-the project tree under `03_解析/`.
-
-Each results file records `env.prereg_commit` (a commit of this repo) and
-`env.script_sha256`, so any number in the paper can be traced to the exact
-pre-registration text and the exact script that produced it.
+This repository is the time-stamping record for a study on activation steering of emotion in
+large language models. Its purpose is narrow and specific: **every criterion, statistic and pass
+condition was committed and pushed before the judgement it governs was executed.** The commit
+dates are the evidence; the text is the claim.
 
 ## Layout
 
-- `03_解析/preregistration/` — pre-registrations, including dated amendments and
-  invalidation notes. Nothing here is ever deleted or silently rewritten; a
-  superseded registration keeps its text and gains an invalidation section.
-- `python/phase10/` — extraction, ICA rebuild, intervention and positive-control
-  code, plus the self-checks.
+| Directory | Contents |
+|---|---|
+| `preregistration/` | the base pre-registration documents and the fixed data splits |
+| `amendments/` | the amendments, 106 files, **as registered** |
+| `amendments_en/` | faithful English translations of the amendments |
+| `release/` | the code that produces every measurement and every number in the paper |
+| `code/`, `python/` | earlier implementation, kept for the record |
+| `stimuli/`, `stimuli_e5/` | stimulus specifications |
+| `manuscript_figures/` | figures and tables of an earlier manuscript |
+| `draft_ja/` | an early Japanese draft, superseded |
 
-## Status (2026-09-25)
+## On the two amendment directories
 
-- The original ICA axes were estimated from PAD-position activations
-  (`padding=True`, `padding_side="right"`, `batch_size=8`, then `hs[:, -1, :]`);
-  258/300 stimuli were affected. Those axes and every result derived from them
-  are marked INVALID and were rebuilt from `batch_size=1`, unpadded activations.
-- The judge-free positive control (next-token JS divergence) passes at layers
-  5/7/10/12 on the rebuilt axes when the valence direction is regressed from
-  last-token activations; the older mean-pooled direction passes only at layer 12.
-- No judge LLM is used anywhere in these measurements (PI directive: judges
-  trained on human emotion frameworks make the argument circular).
+**`amendments/` holds the originals.** They are in Japanese because that is the language in which
+they were written and committed; the commit that carries each file is what establishes when its
+criteria were fixed. They are not edited.
+
+**`amendments_en/` holds translations added on 2026-10-15**, after the fact, so that readers can
+follow the record. A translation is not the registered text. Where the two differ, the Japanese
+file is authoritative. The translations were checked against the originals for heading structure,
+for the set of numbers they contain, and for the preservation of every commitment and every
+admission of error; two defects found in that check were corrected.
+
+Personal and team names were replaced by roles in the translations. Cited authors are unchanged.
+
+## Numbering
+
+Amendments run from 1 to 108 with 30 and 31 unused. Each file names, at its head, what it governs
+and whether it had been executed at the time of writing. Several record failures: measurements that
+could not be judged, a control that failed its own validity check, a threshold set after seeing
+degenerate values, and a half of a sweep lost to a filename collision. These are part of the record
+and are not removed.
+
+## Code
+
+See `release/README.md`. The measurement scripts need a GPU; the analysis scripts recompute every
+reported number from the stored archives and do not. No number in the paper is entered by hand.

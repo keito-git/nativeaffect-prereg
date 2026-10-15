@@ -1,0 +1,34 @@
+{
+  "generated_utc": "2026-09-26T06:40:15.975493+00:00",
+  "prereg_commit": "823ecdc",
+  "model": "Qwen/Qwen3-8B",
+  "layer": 16,
+  "n_stimuli": 5,
+  "hidden_size": 4096,
+  "vocab_size": 151936,
+  "purpose": "cost measurement only; no result feeds any claim",
+  "jacobian_never_formed_explicitly": true,
+  "explicit_jacobian_would_be_GB": 2.32,
+  "vjp": {
+    "seconds_per_vjp_mean": 0.068,
+    "seconds_per_vjp_sd": 0.0505,
+    "batch_size": 1,
+    "peak_gpu_MiB": 15729
+  },
+  "randomized_svd_projection": {
+    "target_rank": 10,
+    "oversampling": 10,
+    "power_iterations": 2,
+    "vjp_per_stimulus_per_layer": 100,
+    "total_vjp_287stim_4layers": 114800,
+    "hours": 2.17
+  },
+  "scalar_gradient_alternative": {
+    "scalar_used_in_this_probe": "next-token entropy (an example; the choice is the coordinator's and must be fixed before any real run)",
+    "seconds_per_backward_mean": 0.0448,
+    "total_backwards_287stim_4layers": 1148,
+    "hours": 0.014,
+    "cheaper_by_factor": 151.7
+  },
+  "peak_gpu_MiB_overall": 15729
+}

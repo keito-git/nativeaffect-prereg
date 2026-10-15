@@ -1,0 +1,52 @@
+{
+  "generated_utc": "2026-09-26T04:22:24.063202+00:00",
+  "purpose": "G4 feasibility precondition; not a pre-registered test",
+  "model": "swiss-ai/Apertus-v1.1-1.5B",
+  "benchmark": "GSM8K test",
+  "n_items": 500,
+  "sample_seed": 20260926,
+  "n_shot": 8,
+  "shot_source": "GSM8K train split",
+  "decoding": "greedy",
+  "intervention": null,
+  "criterion": "accuracy monotone in the budget AND max-min >= 5.0 points",
+  "budgets": {
+    "64": {
+      "accuracy_pct": 4.6,
+      "n_correct": 23,
+      "mean_generated_tokens": 64.0,
+      "seconds": 356.5
+    },
+    "128": {
+      "accuracy_pct": 8.6,
+      "n_correct": 43,
+      "mean_generated_tokens": 128.0,
+      "seconds": 704.0
+    },
+    "256": {
+      "accuracy_pct": 8.8,
+      "n_correct": 44,
+      "mean_generated_tokens": 256.0,
+      "seconds": 1394.0
+    },
+    "512": {
+      "accuracy_pct": 8.8,
+      "n_correct": 44,
+      "mean_generated_tokens": 512.0,
+      "seconds": 2778.2
+    }
+  },
+  "verdict": {
+    "accuracies": [
+      4.6,
+      8.6,
+      8.8,
+      8.8
+    ],
+    "monotone_nondecreasing": true,
+    "gain_points_max_minus_min": 4.2,
+    "gain_at_least_5_points": false,
+    "PRECONDITION_MET": false,
+    "if_not_met": "G4 cannot be measured on this model: there is no upward curve to shift. Stop and report; the coordinator decides the model."
+  }
+}

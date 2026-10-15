@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-09-26T04:40:02.622766+00:00",
+  "purpose": "sensitivity analysis inside GSM8K instead of adding a dataset; MATH is unavailable for licence reasons",
+  "computed_before_any_G4_measurement": true,
+  "source_file": "/path/to/work/data/raw/benchmarks/gsm8k_test.jsonl",
+  "source_sha256": "752adc99f23132275139f1f7be57126b08735a55daf0c56859ee6df70abafbac",
+  "n_items": 1319,
+  "statistic": "number of <<...>> calculation annotations in the reference answer",
+  "distribution": {
+    "min": 0,
+    "max": 8,
+    "mean": 3.246,
+    "median": 3.0,
+    "counts_by_step": {
+      "0": 18,
+      "1": 65,
+      "2": 357,
+      "3": 364,
+      "4": 290,
+      "5": 138,
+      "6": 57,
+      "7": 21,
+      "8": 9
+    }
+  },
+  "tertile_boundaries": {
+    "q33": 2.3333333333333144,
+    "q67": 4.0,
+    "rule": "low: steps<=q33, mid: q33<steps<=q67, high: steps>q67"
+  },
+  "bin_sizes": {
+    "low": 440,
+    "mid": 654,
+    "high": 225
+  },
+  "hard_bin": "high",
+  "note": "boundaries are fixed here and are not adjusted later"
+}

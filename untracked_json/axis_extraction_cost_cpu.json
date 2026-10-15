@@ -1,0 +1,18 @@
+{
+  "note": "synthetic matrices of the real shape (287 x d); CPU only",
+  "n_samples": 287,
+  "results": {
+    "2048": {
+      "pca50_s": 0.045,
+      "ica20_s": 0.255,
+      "pmf20draws_s": 0.0022,
+      "ica_ok": true
+    },
+    "4096": {
+      "pca50_s": 0.1,
+      "ica20_s": 0.346,
+      "pmf20draws_s": 0.0182,
+      "ica_ok": true
+    }
+  }
+}
