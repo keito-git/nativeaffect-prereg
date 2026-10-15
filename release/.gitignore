@@ -1,0 +1,4 @@
+work/
+*.npz
+*.npy
+__pycache__/
