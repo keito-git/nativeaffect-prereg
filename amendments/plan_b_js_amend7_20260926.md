@@ -1,22 +1,22 @@
 # 事前登録 追記7：MATH を使わない。評価は GSM8K のみとする
 
 **対象**: 追記5（`b472ce9`）E1 の決定を変更する
-**作成**: 野村 / 2026-09-26
+**作成**: 2026-09-26
 **状態**: **実験前**（MATH での測定は一度も実行していない。GSM8K の前提条件確認のみ実行中）
-**典拠**: `01_調査/ベンチマークのライセンス確認_20260926.md`（伊藤・一次確認 ◎）
+**典拠**: `01_調査/ベンチマークのライセンス確認_20260926.md`（文献担当・一次確認 ◎）
 
 ---
 
 ## G1. 判明した事実
 
-**MATH データセットは DMCA テイクダウン通知を受けている。** 伊藤が HuggingFace 公式のテイクダウン通知リポジトリで一次確認した（`huggingface-legal/takedown-notices/blob/main/2025/2025-01-02-AoPS.md`）。
+**MATH データセットは DMCA テイクダウン通知を受けている。** 文献担当が HuggingFace 公式のテイクダウン通知リポジトリで一次確認した（`huggingface-legal/takedown-notices/blob/main/2025/2025-01-02-AoPS.md`）。
 
 - **通知者**: Art of Problem Solving (AoPS) Incorporated
 - **通知日**: 2025年1月2日
 - **主張**: 12,500問のうち **10,000問以上**が AoPS の Alcumus プラットフォームの独自コンテンツと類似度95以上で一致。**問題文と解答の両方**が AoPS の著作物であるとする
 - **原文**: "The MATH dataset contains both proprietary problems written by our team for usage in our Alcumus learning platform, as well as all of our proprietary solutions entirely written by our team."
 - **対象**: `hendrycks/competition_math` **および派生データセット**（明示的に要求されている）
-- **結果**: `hendrycks/competition_math` は削除済み。**中村が遭遇した `DatasetNotFoundError` の原因はこれである**
+- **結果**: `hendrycks/competition_math` は削除済み。**実験担当が遭遇した `DatasetNotFoundError` の原因はこれである**
 
 **時系列**: DMCA が 2025年1月2日、`hendrycks/math` の README が `qwedsacf` を指すよう更新されたのが 2025年9月6日（コミット者 `hendrycks`）。**README 更新は DMCA より後だが、AoPS の著作権主張を解消するものではない。**
 
@@ -50,10 +50,10 @@
 
 - `EleutherAI` 版（`benchmarks/_unused_license_unclear/`）と `qwedsacf` 版の両方を、**`benchmarks/_dmca_do_not_use/` へ移動**し、ディレクトリ名で使用禁止が分かるようにする
 - **同ディレクトリに、テイクダウン通知の URL と通知日・通知者を記した `README_DO_NOT_USE.txt` を置く**
-- **削除するか否かは PI が判断する。** 野村は削除しない
+- **削除するか否かは PI が判断する。** 助教は削除しない
 
 ## G5. 記録
 
 **この判断は実験前に行った。** MATH での測定は一度も実行していない。
-**「MIT と書いてあった」で済ませかけた経緯を記録する**: 中村が HF のカードの `license: mit` を根拠に取得し、伊藤が `EleutherAI` 版のロードスクリプトに `_LICENSE = ""  # TODO: Add the licence for the dataset here if you can find it` を発見したことで再確認が始まり、その過程で DMCA が判明した。
+**「MIT と書いてあった」で済ませかけた経緯を記録する**: 実験担当が HF のカードの `license: mit` を根拠に取得し、文献担当が `EleutherAI` 版のロードスクリプトに `_LICENSE = ""  # TODO: Add the licence for the dataset here if you can find it` を発見したことで再確認が始まり、その過程で DMCA が判明した。
 **ライセンスのタグは一次情報ではない。** LICENSE の実物・権利者・第三者の権利主張の3つを見る。

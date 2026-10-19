@@ -12,7 +12,7 @@ activations (right padding + index -1) and are invalid.
 Positive control, rebuilt: does the Warriner-valence direction move the
 next-token distribution more than the noise floor?
 
-Scope (Nomura, 2026-09-25): positive control ONLY.  No axis sweep is re-run,
+Scope (supervising associate, 2026-09-25): positive control ONLY.  No axis sweep is re-run,
 no axis search is performed, and NO judge LLM is ever loaded (PI directive:
 judges are trained on human emotion frameworks, so using them to validate a
 claim about AI-native axes is circular).
@@ -89,7 +89,7 @@ Usage
         --stimuli /path/to/work/code/stimuli/stimuli_e4.json \
         --output-dir /path/to/work/results/pos_ctrl_v2
 
-Author: 中村 (NativeAffect, paper 2)   Date: 2026-09-25
+Author: experiment lead (NativeAffect, paper 2)   Date: 2026-09-25
 """
 
 from __future__ import annotations

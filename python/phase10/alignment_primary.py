@@ -3,7 +3,7 @@
 
 Prereg section 25. CPU only: no model, no hook, no intervention.
 
-Three things Nomura made mandatory:
+Three things the supervising associate made mandatory:
 
 1. The headline number is the FRACTION OF AXIS NORM INSIDE the human subspace,
    1 - (residual norm ratio)^2, which is directly interpretable, rather than

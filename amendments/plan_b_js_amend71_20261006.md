@@ -62,7 +62,7 @@ Xeno-Interpretability に帰属させる。
 
 - Emotions Where Art Thou（ICLR 2026）: 低次元 emotion manifold・領域横断整合・steerability を報告とされる
 - A Unified View on Emotion Representation in Large Language Models（EACL 2026, `2026.eacl-long.165`）:
-  データセット間で交換可能な共通感情表現を報告とされる。伊藤のサーベイにも記載があるが本文未確認
+  データセット間で交換可能な共通感情表現を報告とされる。文献担当のサーベイにも記載があるが本文未確認
 
 **これらが「低次元で普遍的な感情部分空間が存在する」と報告しているのであれば、本研究の問題設定は
 それらに正面から対峙する形になる。** 導入の枠づけに直接関わるため、**本文の入手確認を次の作業に含める。**

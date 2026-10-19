@@ -57,7 +57,7 @@ assert n_pos_d == n_pos_c == 10, (n_pos_d, n_pos_c)
 
 payload = {
     "created_utc": "2026-09-25",
-    "created_by": "中村 (experiment, team Nomura)",
+    "created_by": "experiment lead",
     "prereg": ("03_解析/preregistration/axis_rebuilt_prereg_20260925.md "
                "§4-1 and §10"),
     "seed": SEED,

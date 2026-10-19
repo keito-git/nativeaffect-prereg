@@ -212,7 +212,7 @@ def main() -> int:
     ap.add_argument("--norm-set-name", default="",
                     help="declared, citation-verified name of the norm set")
     ap.add_argument("--citation-verified", action="store_true",
-                    help="set only after Ito has confirmed the bibliography "
+                    help="set only after the literature lead has confirmed the bibliography "
                          "first-hand (prereg 54.6)")
     ap.add_argument("--out", type=Path)
     ap.add_argument("--dry-run", action="store_true")

@@ -13,7 +13,7 @@ OUT = LOG_DIR / "axis2_intensity_sweep_INVALID.json"
 
 note = {
     "INVALID": {
-        "marked_by": "中村 (experiment, team Nomura)",
+        "marked_by": "experiment lead",
         "marked_utc": "2026-09-25",
         "verdict": ("INVALID: this sweep intervened along ICA axes estimated from "
                     "PAD-position activations. Its results are not interpretable "
@@ -37,20 +37,20 @@ note = {
             "cause": "OOM-killed, NOT a clean finish and NOT a deliberate stop",
             "detail": (
                 "At 2026-09-25 ~10:54 UTC the container exceeded its cgroup RAM "
-                "limit (memory.max = 8589934592 B = 8 GiB) because 中村 started "
+                "limit (memory.max = 8589934592 B = 8 GiB) because the experiment lead started "
                 "rebuild_axes_nopad.py while this sweep and run_pos_ctrl_v2.py "
                 "were already running. The kernel OOM killer terminated this "
                 "process (\"212648 Killed\" in the launcher log) and also "
                 "run_pos_ctrl_v2.py at its layer 10. Reported to the coordinator; "
                 "model-loading jobs are now run strictly one at a time."),
-            "responsibility": ("中村 launched the third process without checking "
+            "responsibility": ("the experiment lead launched the third process without checking "
                                "the RAM budget."),
         },
         "note_on_scheduling": (
             "The coordinator subsequently directed that this sweep be stopped "
             "anyway, since results on the old axes are uninterpretable. The "
             "process was already dead from the OOM by the time that instruction "
-            "arrived, so no kill was issued by 中村."),
+            "arrived, so no kill was issued by the experiment lead."),
         "superseded_by": ("a rerun on the rebuilt PAD-free axes "
                           "(results/ica_nopad/), to be pre-registered before it "
                           "is launched"),

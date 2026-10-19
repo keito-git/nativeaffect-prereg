@@ -1,5 +1,5 @@
 #!/bin/bash
-# launch_pos_ctrl_v3.sh  2026-09-25  中村
+# launch_pos_ctrl_v3.sh  2026-09-25
 # Positive control on the REBUILT (PAD-free) ICA axes. All 4 layers.
 # GPU: 0 only. RUN ALONE: the container RAM limit is 8 GiB (memory.max), and
 # running a second model-loading process caused an OOM kill at 10:54 UTC.

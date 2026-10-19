@@ -14,7 +14,7 @@ SLUG = "swiss-ai__Apertus-v1_1-1_5B"
 LAYERS = (5, 7, 10, 12)
 
 REASON = {
-    "marked_by": "中村 (experiment, team Nomura)",
+    "marked_by": "experiment lead",
     "marked_utc": "2026-09-25",
     "verdict": ("INVALID: the ICA axes behind this artefact were estimated from "
                 "PAD-position activations. Do not cite or interpret. Retained as "

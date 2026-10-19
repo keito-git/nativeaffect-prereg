@@ -7,7 +7,7 @@ norms.
 
 Why this exists
 ---------------
-Nomura's caution: enlarging the human subspace mechanically drives every axis's
+The supervising associate's caution: enlarging the human subspace mechanically drives every axis's
 residual towards zero, so "how many dimensions were added" is not the right
 figure -- the effective rank and the residual norm ratio are. This script
 measures those BEFORE any GPU time is spent, so we can tell whether the stricter

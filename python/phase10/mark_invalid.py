@@ -12,7 +12,7 @@ TARGET = Path("/path/to/work/results/pos_ctrl/"
 BACKUP = TARGET.with_suffix(".json.orig_backup")
 
 REASON = {
-    "marked_by": "中村 (experiment, team Nomura)",
+    "marked_by": "experiment lead",
     "marked_utc": "2026-09-25",
     "verdict": "INVALID as a positive control. Do not cite these numbers.",
     "reasons": [

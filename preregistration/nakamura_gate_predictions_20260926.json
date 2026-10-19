@@ -1,9 +1,9 @@
 {
   "recorded_utc": "2026-09-26T13:45:00Z",
   "author": "nakamura (experiments)",
-  "obligation": "plan_b_js_prereg_20260926.md section 8: 中村にも独立に予測を記録させる",
+  "obligation": "plan_b_js_prereg_20260926.md section 8: 実験担当にも独立に予測を記録させる",
   "recorded_before": "any G1 judgement statistic exists. The Jacobian stage has produced candidate directions for layers 11/16/22/27 and the exact PC-overlap diagnostics, and nothing else. No axis JS and no PMF floor draw has been computed.",
-  "independent_of": "野村の事前予測 (G1 45%, G2|G1 60%, G3|G2 70%, G4|G3 25%). Written without revising toward those numbers; where I differ, the reason is stated.",
+  "independent_of": "助教の事前予測 (G1 45%, G2|G1 60%, G3|G2 70%, G4|G3 25%). Written without revising toward those numbers; where I differ, the reason is stated.",
   "predictions": {
     "G1_pass": 0.85,
     "G2_pass_given_G1": 0.35,

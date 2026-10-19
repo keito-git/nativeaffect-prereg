@@ -1,8 +1,8 @@
 #!/bin/bash
-# launch_axis_residual_v2.sh  2026-09-25  中村
+# launch_axis_residual_v2.sh  2026-09-25
 # Intensity sweep + residual-axis test on the rebuilt axes, DISCOVERY set only.
 #
-# RAM rule (Nomura, 2026-09-25): the cgroup limit is 8 GiB and is SHARED with
+# RAM rule (supervising associate, 2026-09-25): the cgroup limit is 8 GiB and is SHARED with
 # other projects (/path/to/work/caupsi_eaai/train.py is running and must never be
 # stopped). Measure free RAM first and do not start if
 #   expected RSS + current anon usage > 6 GiB

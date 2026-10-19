@@ -1,9 +1,9 @@
 # 事前登録 追記5：G4 のベンチマークを GSM8K と MATH に確定する（AIME は使わない）
 
 **対象**: `plan_b_js_prereg_20260926.md` §2 G4、追記2 B3、追記4 D2
-**作成**: 野村 / 2026-09-26
+**作成**: 2026-09-26
 **状態**: **実験前。** push 前
-**典拠**: `01_調査/ベンチマークのライセンス確認_20260926.md`（伊藤・一次確認）
+**典拠**: `01_調査/ベンチマークのライセンス確認_20260926.md`（文献担当・一次確認）
 
 ---
 
@@ -17,7 +17,7 @@
 | **MATH**（`hendrycks/competition_math`） | MIT（Copyright (c) Dan Hendrycks, 2021） | GitHub `hendrycks/math` の LICENSE 実物＋HF メタデータの二重確認 | **副ベンチマークとして使用** |
 | **AIME** | **不明（グレー）** | 問題の著作権は Mathematical Association of America に帰属。HF 上の各データセットが表示する Apache 2.0 等は**データセット作成者が付したもので、MAA 著作物の再利用を許諾する権限を持つ主体の表示ではない** | **使わない** |
 
-## E2. AIME を使わない判断（野村）
+## E2. AIME を使わない判断（助教）
 
 **理由は2つ。**
 
@@ -38,7 +38,7 @@
 - **MATH**: MIT だが12,500件で大きいため、**リンクと取得スクリプトのみを公開する**（同梱しない）
 - 取得は HuggingFace datasets 経由。**API キーは使わない**
 
-## E5. 引用（伊藤が著者全員を確認済み）
+## E5. 引用（文献担当が著者全員を確認済み）
 
 - GSM8K: Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian, Mark Chen, Heewoo Jun, Lukasz Kaiser, Matthias Plappert, Jerry Tworek, Jacob Hilton, Reiichiro Nakano, Christopher Hesse, John Schulman (2021), arXiv:2110.14168
 - MATH: Dan Hendrycks, Collin Burns, Saurav Kadavath, Akul Arora, Steven Basart, Eric Tang, Dawn Song, Jacob Steinhardt (2021), arXiv:2103.03874
@@ -48,4 +48,4 @@
 ## E6. G4 実行前の前提条件（再掲・変更なし）
 
 **選んだモデルで介入なしのベースライン曲線が平らでないことを先に確認する。** GSM8K 500問、トークン予算4点（64 / 128 / 256 / 512）で精度が単調に上がり、**最小予算と最大予算の差が5ポイント以上**あること。
-**満たさなければそのモデルで G4 は測定不能**とし、停止して報告する。モデル変更は野村が決める。
+**満たさなければそのモデルで G4 は測定不能**とし、停止して報告する。モデル変更は助教が決める。

@@ -78,7 +78,7 @@ def main() -> int:
     dv = np.array([v for *_, v in disc]); cv = np.array([v for *_, v in conf])
     rec = {
         "created_utc": datetime.now(timezone.utc).isoformat(),
-        "created_by": "Nakamura (experiment, team Nomura)",
+        "created_by": "experiment lead",
         "addendum": "13", "prereg_commit": "2013dae",
         "defined_before_any_G1_judgement": True,
         "purpose": ("E1 had no split; axis_rebuilt_split_20260925.json splits E4. "

@@ -2,7 +2,7 @@
 """Rebuild the ICA axes from PAD-free last-token activations, and measure how
 much the padding bug moved them.
 
-The bug (Nomura directive, 2026-09-25)
+The bug (directive of the supervising associate, 2026-09-25)
 --------------------------------------
 `extract_activations.py` tokenises with `padding=True` at `batch_size=8` and then
 reads `hs[:, -1, :]`.  The tokeniser pads on the RIGHT
@@ -41,7 +41,7 @@ Usage
     python3 rebuild_axes_nopad.py --self-check
     python3 rebuild_axes_nopad.py --layers 5 7 10 12 --stage all
 
-Author: 中村 (NativeAffect, paper 2)   Date: 2026-09-25
+Author: experiment lead (NativeAffect, paper 2)   Date: 2026-09-25
 """
 
 from __future__ import annotations

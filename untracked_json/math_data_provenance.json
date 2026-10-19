@@ -62,7 +62,7 @@
   "incidental_finding_train_test_overlap": {
     "finding": "in EleutherAI/hendrycks_math, one problem appears in BOTH the train and the test split (once each). The same problem occurs twice in the licence-clean source.",
     "scale": "1 problem out of 12500; small but real",
-    "prior_report": "Ito is checking whether this is already reported. If it is, the source will be cited. If it is not found, the wording will be 'we found this in our cross-check and could not confirm a prior report' - NOT 'first to find'.",
+    "prior_report": "The literature lead is checking whether this is already reported. If it is, the source will be cited. If it is not found, the wording will be 'we found this in our cross-check and could not confirm a prior report' - NOT 'first to find'.",
     "effect_on_our_results": {
       "statement": "none. Our data come from the licence-clean source and the EleutherAI copy is used only as an index of which problems were train and which were test. The ambiguous problem is excluded from both splits.",
       "evidence": {
@@ -86,7 +86,7 @@
     "observed_consequence": "hendrycks/competition_math was removed from the Hub, which is why our first load attempt returned DatasetNotFoundError",
     "why_an_mit_tag_was_not_enough": "Hendrycks' MIT licence covers what he holds rights to; AoPS asserts rights in the problems and solutions themselves. The two are compatible, so an MIT tag did not mean the content could be reused.",
     "data_handling": "all copies moved to benchmarks/_dmca_do_not_use/, not deleted; deletion is the PI's decision",
-    "verified_by": "Ito, first-hand in the official takedown-notice repository"
+    "verified_by": "literature lead, first-hand in the official takedown-notice repository"
   },
   "licence_tags_are_not_primary_evidence": {
     "three_layers_seen_in_this_case": [

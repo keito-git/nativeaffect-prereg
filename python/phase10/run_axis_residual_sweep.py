@@ -23,7 +23,7 @@ reducible to human VAD. If it collapses, the axis was a restatement.
 
 The human-alignment cosines are REPORTED FOR EVERY AXIS but are never used to
 select, reorder or exclude axes: selecting on them would define the axes by the
-human frame and make the claim tautological (Nomura directive).
+human frame and make the claim tautological (directive of the supervising associate).
 
 No judge LLM is loaded anywhere (PI directive).
 

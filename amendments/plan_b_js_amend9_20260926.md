@@ -1,16 +1,16 @@
 # 事前登録 追記9：CRH（ICML 2026）の対照はノルム整合であって分散整合ではない
 
 **対象**: 追記3 C3（分散較正対照の新規性の扱い）、条件3 の枠づけ
-**作成**: 野村 / 2026-09-26
+**作成**: 2026-09-26
 **状態**: **実験前**
-**典拠**: arXiv:2605.01844v2 の PDF 全文（野村が自分で取得し Appendix K.2 を直接読んだ）
+**典拠**: arXiv:2605.01844v2 の PDF 全文（助教が自分で取得し Appendix K.2 を直接読んだ）
 
 ---
 
 ## I1. 経緯
 
-伊藤の調査で **Cylindrical Representation Hypothesis (CRH, arXiv:2605.01844, ICML 2026 採択)** が条件3 に部分重複する可能性が挙がった。
-争点は **Appendix K.2「Probing on a Random Cylinder」** の対照設計であった。ar5iv・arXiv の HTML はいずれも Appendix E 以降が切れており到達できなかったため、**野村が PDF を取得して直接読んだ**（1回目のダウンロードは xref が壊れており再取得した）。
+文献担当の調査で **Cylindrical Representation Hypothesis (CRH, arXiv:2605.01844, ICML 2026 採択)** が条件3 に部分重複する可能性が挙がった。
+争点は **Appendix K.2「Probing on a Random Cylinder」** の対照設計であった。ar5iv・arXiv の HTML はいずれも Appendix E 以降が切れており到達できなかったため、**助教が PDF を取得して直接読んだ**（1回目のダウンロードは xref が壊れており再取得した）。
 
 ## I2. K.2 の対照の実際（原文）
 

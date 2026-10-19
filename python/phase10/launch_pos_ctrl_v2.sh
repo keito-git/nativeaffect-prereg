@@ -1,5 +1,5 @@
 #!/bin/bash
-# launch_pos_ctrl_v2.sh  2026-09-25  中村
+# launch_pos_ctrl_v2.sh  2026-09-25
 # Positive-control rebuild only. No axis sweep, no judge LLM.
 # GPU: 0 only (PI rule). PID 212648 (axis-2 intensity sweep) must NOT be touched.
 set -euo pipefail
